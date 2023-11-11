@@ -1,0 +1,44 @@
+<template>
+  <div class="card-store">
+    <div class="div-img">
+      <nuxt-img :src="celebrity.image" :alt="celebrity.alt" class="img" />
+    </div>
+    <p class="mt-2 font-bold">{{ celebrity.name }}</p>
+  </div>
+</template>
+
+<script setup>
+const { props } = defineProps(["celebrity"]);
+</script>
+
+<style scoped>
+.card-store {
+  margin: 65px 15px 4px 15px;
+}
+
+.div-img {
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: top;
+}
+
+/* media queries  */
+@media screen and (max-width: 700px) {
+  .card-store {
+    width: 100%;
+    margin: 55px 3px 3px 3px;
+  }
+  .div-img {
+    height: fit-content;
+  }
+  .img {
+    height: max-content;
+  }
+}
+</style>
