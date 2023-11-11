@@ -34,7 +34,7 @@ export const useUserStore = defineStore('UserStore', {
     actions: {
         //Register new user
         async registerUser(registrationData) {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/users/register');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/register');
             await axios.post(url, registrationData)
                 .then(response => {
                     console.log(response.data),
@@ -66,7 +66,7 @@ export const useUserStore = defineStore('UserStore', {
         },
         //Login user
         async loginUser(loginData) {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/users/login');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/login');
             try {
                 const response = await axios.post(url, loginData);
                 const userData = response.data;
@@ -99,7 +99,7 @@ export const useUserStore = defineStore('UserStore', {
         async getUser() {
             if (useCookie("accessToken").value) {
                 try {
-                    const userResponse = await axios.get('/api/users/auth', {
+                    const userResponse = await axios.get('/proxy/users/auth', {
                         headers: {
                             Authorization: `Bearer ${useCookie("accessToken").value}`
                         }
@@ -118,7 +118,7 @@ export const useUserStore = defineStore('UserStore', {
         async sendPasswordReset(resetEmail) {
             console.log(resetEmail)
             axios
-                .post(useRuntimeConfig().public.APP_URL + "/api/users/forgot-password", {
+                .post(useRuntimeConfig().public.APP_URL + "/proxy/users/forgot-password", {
                     email: resetEmail,
                 })
                 .then((response) => {
@@ -131,7 +131,7 @@ export const useUserStore = defineStore('UserStore', {
         // Change or create default shipping data.
         async changeShippingData(addressData) {
             const userId = this.authUser.id;
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/users/change-shipping-data');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/change-shipping-data');
 
             try {
                 const response = await axios.put(url, addressData, {
@@ -148,7 +148,7 @@ export const useUserStore = defineStore('UserStore', {
         },
         // Load user default shipping data.
         async loadDefaultShippingData() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/users/get-shipping-data');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/get-shipping-data');
 
             if (useCookie("accessToken").value) {
                 try {
@@ -167,7 +167,7 @@ export const useUserStore = defineStore('UserStore', {
         // load order's user from id
         async loadOrderUser() {
             this.loading = true; // Shows the loader while loading
-            const url = new URL(useRuntimeConfig().public.APP_URL + `/api/orders`);
+            const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/orders`);
 
             try {
                 const response = await axios.get(url, {
@@ -177,7 +177,6 @@ export const useUserStore = defineStore('UserStore', {
                 });
 
                 this.orders = response.data;
-                console.log(ciao);
             } catch (error) {
                 console.error(error);
                 throw error;
@@ -187,7 +186,7 @@ export const useUserStore = defineStore('UserStore', {
         },
         // Logout user
         logoutUser() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/users/logout');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/logout');
             const userId = this.authUser.id;
             axios.post(url, userId, {
                 headers: {

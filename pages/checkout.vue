@@ -7,7 +7,7 @@
     </div>
     <div class="border border-black mt-2 mb-3"></div>
     
-    <CheckoutOrderSummaryComponent
+    <OrderSummaryComponent
       v-for="item in useCartStore().cartItems"
       :key="item.id"
       :item="item"
@@ -24,9 +24,9 @@
       </div>
     </div>
 
-    <CheckoutShippingComponent class="mt-16" />
+    <ShippingComponent class="mt-16" />
 
-    <CheckoutPaymentComponent />
+    <PaymentComponent />
   </div>
 </template>
 

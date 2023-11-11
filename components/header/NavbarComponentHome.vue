@@ -44,7 +44,7 @@
             <div v-if="useUserStore().isLoggedIn" class="logged-in"></div>
           </li>
           <li class="my-12">
-            <HeaderSearchComponent />
+            <SearchComponent />
           </li>
           <!--  -------------------------------------------------------   -->
           <li class="mt-14 text-xs">

@@ -32,7 +32,7 @@ onMounted(() => {
 });
 
 function selectColor(variation) {
-  useProductStore().setColorVariant(variation);
+  useProductStore().setColorVariant(variation)
 }
 
 function isSelected(variation) {

@@ -1,5 +1,5 @@
 <template>
-  <HeaderNavbarComponent />
+  <NavbarComponent />
   <div class="my-24">
     <main>
       <slot />
@@ -37,7 +37,7 @@ const handleUserHash = () => {
       expire_date: date.addDays(6),
     };
     axios
-      .post(runtimeConfig.public.APP_URL + "/api/hash/store", data, {
+      .post(runtimeConfig.public.APP_URL + "/proxy/hash/store", data, {
         headers: {
           "Content-Type": "application/json",
         },

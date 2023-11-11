@@ -16,7 +16,7 @@ export const useCategoryStore = defineStore('CategoryStore', {
     actions: {
         // Load Categories 
         async loadCategories() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/categories');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/categories');
             const params = {
                 'no-paginate': '',
             };

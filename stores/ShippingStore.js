@@ -62,7 +62,7 @@ export const useShippingStore = defineStore('ShippingStore', {
             shippingData.shipping_zip_code = shippingData.shipping_zip_code || null;
             shippingData.shipping_contact_phone = shippingData.shipping_contact_phone || null;
 
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/orders/set-shipping');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/orders/set-shipping');
 
             try {
                 const response = await axios.post(url, shippingData, {

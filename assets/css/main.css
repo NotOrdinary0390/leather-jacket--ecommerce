@@ -109,14 +109,14 @@
 /* Address Form */
 .form-address {
     display: flex;
-    justify-content: between;
+    justify-content: space-between;
     margin-top: 20px;
     margin-bottom: 10px;
   }
   
   .label-address {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     width: 131px;
     margin-right: 4em;
   }

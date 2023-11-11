@@ -23,7 +23,13 @@
       <LoaderComponent />
     </div>
     <div v-else class="mx-auto">
-      <ShopComponent />
+      <div class="flex flex-wrap">
+        <CardProducts
+            v-for="variation in useProductStore().getVariations"
+            :key="variation.id"
+            :variation="variation"
+        />
+      </div>
     </div>
   </div>
 </template>

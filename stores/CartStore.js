@@ -39,9 +39,9 @@ export const useCartStore = defineStore('CartStore', {
                 this.cartItem.user_id = null; //
                 this.cartItem.user_hash = useCookie("userHash").value;
               }
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/cart/add');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/add');
             return axios
-                .post(url, this.cartItem)
+                .post(url.toString(), this.cartItem)
                 .then(response => {
                     this.loadCartItems();
                 })
@@ -53,7 +53,7 @@ export const useCartStore = defineStore('CartStore', {
         },
         // Load items Cart 
         async loadCartItems() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/cart');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart');
             const params = {
                 //
             };
@@ -65,7 +65,7 @@ export const useCartStore = defineStore('CartStore', {
             //console.log(useUserStore().isLoggedIn);
             return axios
                 .post(
-                    url, data
+                    url.toString(), data
                 )
                 .then(response => {
                     this.cartItems = response.data.data.cart_items;
@@ -73,7 +73,7 @@ export const useCartStore = defineStore('CartStore', {
                     console.log(this.cartItems)
                     if (this.cartItems.length > 0) {
                         const canCheckout = useCookie("canCheckout")
-                        canCheckout.value = true;
+                        canCheckout.value = "true";
                     } else {
                         const canCheckout = useCookie("canCheckout")
                         canCheckout.value = null;
@@ -88,7 +88,7 @@ export const useCartStore = defineStore('CartStore', {
         },
         // Remove item Cart 
         async removeCartItem(stock_id, quantity, size_id, product_price) {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/cart/remove');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/remove');
             const params = {
                 //
             };

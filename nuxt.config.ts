@@ -1,16 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
     public: {
       API_URL: process.env.API_URL,
       MEDIA_URL: process.env.MEDIA_URL,
-      APP_URL: process.env.APP_URL
+      APP_URL: process.env.APP_URL,
+      ENABLE_CACHE: process.env.ENABLE_CACHE
     }
   },
   routeRules: {
-    "/api/**": {
+    "/proxy/**": {
       proxy: "https://api.staging.alessandragrimoldi.com/api/v1/**"
     }
   },
@@ -57,5 +64,4 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxt/image", '@pinia/nuxt',]
-
-})
+});

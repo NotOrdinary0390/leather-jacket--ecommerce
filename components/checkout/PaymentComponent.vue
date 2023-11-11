@@ -24,7 +24,7 @@ function pay() {
             //console.log(useUserStore().isLoggedIn);
             return axios
                 .post(
-                    url, data
+                    url.toString(), data
                 )
                 .then(response => {
                   window.open(response.data.data, "_blank")

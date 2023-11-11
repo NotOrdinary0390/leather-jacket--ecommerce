@@ -23,7 +23,7 @@ export const useCollectionStore = defineStore('CollectionStore', {
     actions: {
         // Load all Collections 
         async loadCollections() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/collections');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections');
             const params = {
                 "year": "",
                 "products": "",
@@ -46,7 +46,7 @@ export const useCollectionStore = defineStore('CollectionStore', {
         },
         // Load latest Collection 
         async loadLatestCollection() {
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/api/collections/look-book');
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections/look-book');
 
             return axios
                 .get(
@@ -65,7 +65,7 @@ export const useCollectionStore = defineStore('CollectionStore', {
         // load collection by slug
         async getCollectionBySlug(collectionSlug) {
 
-            const url = new URL(useRuntimeConfig().public.APP_URL + `/api/collections/${collectionSlug}`);
+            const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/collections/${collectionSlug}`);
 
             return axios
                 .get(

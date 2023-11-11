@@ -1,6 +1,6 @@
 <template>
   <div class="home-bg h-[1000px] w-full">
-    <HeaderNavbarComponentHome />
+    <NavbarComponentHome />
     <div>
       <main>
         <slot />
@@ -38,7 +38,7 @@ const handleUserHash = () => {
       expire_date: date.addDays(6),
     };
     axios
-      .post(runtimeConfig.public.APP_URL + "/api/hash/store", data, {
+      .post(runtimeConfig.public.APP_URL + "/proxy/hash/store", data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -65,12 +65,12 @@ onMounted(async () => {
 </script>
 <style scoped>
 .home-bg {
-  background-image: url("../public/images/bg.webp");
+  background-image: url("/images/bg.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
-  font-family: "Gotham";
+  font-family: "Gotham",serif;
 }
 
 .notie-container {

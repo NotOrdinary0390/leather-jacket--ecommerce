@@ -17,7 +17,7 @@ export const useSearchStore = defineStore('SearchStore', {
             this.searchTerm = searchTerm;
             this.loading = true;
             try {
-                const response = await axios.get(useRuntimeConfig().public.APP_URL + '/api/products', {
+                const response = await axios.get(useRuntimeConfig().public.APP_URL + '/proxy/products', {
                     params: {
                         search: searchTerm,
                         stocks: "",

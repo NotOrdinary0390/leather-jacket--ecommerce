@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Slideshow images -->
-    <ProductSlideShowComponent :product="product" />
+    <SlideShowComponent :product="product" />
 
     <!-- box info product -->
     <div class="flex justify-between my-5">
@@ -22,11 +22,11 @@
     <!-- Select variant product | Add to Cart -->
     <div class="my-6">
       <div class="flex space-x-5">
-        <ProductColorVariantComponent :product="product" />
-        <ProductQuantityComponent />
+        <ColorVariantComponent :product="product" />
+        <QuantityComponent />
       </div>
 
-      <ProductSelectComponent :product="product" />
+      <SelectComponent :product="product" />
       <CartBtnComponent />
     </div>
   </div>

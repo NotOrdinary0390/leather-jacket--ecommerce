@@ -4,27 +4,34 @@
       <button @click="prevSlide">Previous</button>
       <button @click="nextSlide">Next</button>
     </div>
-    <img
+    <nuxt-img
       v-for="(image, index) in useProductStore().currentVariation.images"
       :key="image.id"
       :src="useRuntimeConfig().public.MEDIA_URL + image.image"
       :alt="image.image_meta"
-      class="mx-auto"
-      :class="{ active: index === currentIndex }"
+      class="mx-auto w-full md:min-h-[700px] object-fit"
+      :class="[{ active: index === currentIndex }, imgClasses]"
       @mouseover="stopAutoSlide"
       @mouseleave="startAutoSlide"
+      @load="handleImageFadeIn"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { useProductStore } from "~/stores/ProductStore";
 
 // Initialize a ref to track the currently displayed image
 const currentIndex = ref(0);
 
 let intervalId = null;
+
+const imgClasses = ref([]);
+
+const handleImageFadeIn = () => {
+  imgClasses.value = ["animate-fade-in"];
+};
 
 function startAutoSlide() {
   intervalId = setInterval(nextSlide, 5000); // Start automatic slide every 5 seconds
@@ -44,26 +51,26 @@ function nextSlide() {
   currentIndex.value = (currentIndex.value + 1) % useProductStore().currentVariation.images.length; // Move to the next slide
 }
 
-onMounted(() => {
-  currentIndex.value = 0; // Reset the index when the product changes
-  startAutoSlide();
-  // Listen for changes in the "product" prop
-  console.log(useProductStore().currentVariation);
-  // watch(
-  //   () => props.product,
-  //   (newProduct) => {
-  //     product.value = newProduct;
-  //     currentIndex.value = 0; // Reset the index when the product changes
-  //     startAutoSlide(); // Automatically start sliding images
-  //   }
-  // );
-});
-
 // Automatically start sliding images on component mount
 onMounted(startAutoSlide);
+
 </script>
 
 <style scoped>
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .slideshow {
   height: 90%;
   width: 45%;
@@ -89,4 +96,5 @@ img {
     overflow: hidden;
   }
 }
+
 </style>

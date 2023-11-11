@@ -17,15 +17,15 @@
     </div>
 
     <!-- Slideshow images -->
-    <ProductSlideShowComponent />
+    <SlideShowComponent />
 
     <!-- Select variant product | Add to Cart -->
     <div class="box-25">
-      <ProductColorVariantComponent :product="product" />
+      <ColorVariantComponent :product="product" />
 
-      <ProductQuantityComponent class="mb-2"/>
+      <QuantityComponent class="mb-2"/>
 
-      <ProductSelectComponent />
+      <SelectComponent />
       <CartBtnComponent />
     </div>
   </div>

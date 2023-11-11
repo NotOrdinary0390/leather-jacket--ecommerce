@@ -1,15 +1,20 @@
 <template>
   <div class="container-app font-primary">
-    <div v-if="product">
-      <div class="min-[750px]:block hidden">
-        <ProductDesktopSingleProductComponent :product="product" />
+
+    <div v-if="!productStore.loading">
+
+      <div v-if="product">
+        <div class="min-[750px]:block hidden">
+          <DesktopSingleProductComponent :product="product" />
+        </div>
+        <div class="block min-[750px]:hidden">
+          <MobileSingleProductComponent :product="product" />
+        </div>
       </div>
-      <div class="block min-[750px]:hidden">
-        <ProductMobileSingleProductComponent :product="product" />
-      </div>
+
     </div>
 
-    <div v-else class="loader-container">
+    <div v-if="productStore.loading" class="loader-container">
       <LoaderComponent />
     </div>
   </div>
@@ -51,22 +56,13 @@ onMounted(() => {
 watch(
   () => slug.value,
   () => {
-    //console.log(slug.value);
     if (slug.value) {
-      productStore.loadSingleProduct(slug.value).then((response) => {
+      productStore.loadSingleProduct(slug.value).then(() => {
         product.value = productStore.product;
-        console.log(product.value);
       });
     }
   }
 );
 </script>
-<style scoped>
-.box-25 {
-  width: 25%;
-  min-height: 230px;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-}
-</style>
+
+<style scoped></style>
