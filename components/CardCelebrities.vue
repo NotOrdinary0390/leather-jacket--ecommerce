@@ -1,14 +1,16 @@
 <template>
   <div class="card-store">
     <div class="div-img">
-      <nuxt-img :src="celebrity.image" :alt="celebrity.alt" class="img" />
+      <img :src="props.celebrity.image" :alt="props.celebrity.alt" class="img" />
     </div>
-    <p class="mt-2 font-bold">{{ celebrity.name }}</p>
+    <p class="mt-2 font-bold">{{ props.celebrity.name }}</p>
   </div>
 </template>
 
 <script setup>
-const { props } = defineProps(["celebrity"]);
+
+const props = defineProps(["celebrity"]);
+
 </script>
 
 <style scoped>

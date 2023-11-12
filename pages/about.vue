@@ -3,7 +3,7 @@
   <hr />
   <div class="container-app">
     <!-- <div v-html="about.content?.rendered" class="font-primary"></div> -->
-    <nuxt-img
+    <img
       src="/images/about-me.webp"
       alt="alessandra grimoldi stylist leather jacket"
       class="mx-auto w-full md:w-1/2"
