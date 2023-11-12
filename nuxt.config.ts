@@ -37,12 +37,13 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport: 'width=device-width, initial-scale=1',
       htmlAttrs: {
-        lang: "En",  // it sets the language English
+        lang: "En",
       },
       link: [
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0",
+          media: "screen",
         },
         {
           rel: "preconnect",
@@ -54,16 +55,20 @@ export default defineNuxtConfig({
         },
         {
           rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Roboto:wght@400;700&display=swap"
+          href: "https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Roboto:wght@400;700&display=swap",
+          media: "screen",
         },
         {
           rel: "stylesheet",
-          href: "https://unpkg.com/notie/dist/notie.min.css"
+          href: "https://unpkg.com/notie/dist/notie.min.css",
+          media: "screen",
         },
       ],
       script: [
         {
           src: "https://unpkg.com/notie",
+          defer: true,
+          async: true,
         }
       ],
     },

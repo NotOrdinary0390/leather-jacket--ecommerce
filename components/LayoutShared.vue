@@ -46,8 +46,11 @@ const handleUserHash = () => {
 onMounted( async () => {
 
   // Cookie Bot
-  let cookieScript = document.createElement('script')
-  cookieScript.setAttribute('src', 'https://consent.cookiebot.com/uc.js?cbid=fc7baf94-ca54-4f47-8262-cfed979af6a5')
+  let cookieScript = document.createElement('script');
+  cookieScript.setAttribute('src', 'https://consent.cookiebot.com/uc.js?cbid=fc7baf94-ca54-4f47-8262-cfed979af6a5');
+  cookieScript.setAttribute('defer', 'true');
+  cookieScript.setAttribute('async', 'true');
+
   document.head.appendChild(cookieScript);
 
   // Create user Hash temporary
