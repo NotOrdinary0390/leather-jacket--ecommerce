@@ -53,11 +53,11 @@ export default defineNuxtConfig({
           rel: "preconnect",
           href: "https://fonts.gstatic.com",
         },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Roboto:wght@400;700&display=swap",
-          media: "screen",
-        },
+        // {
+        //   rel: "stylesheet",
+        //   href: "https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Roboto:wght@400;700&display=swap",
+        //   media: "screen",
+        // },
         {
           rel: "stylesheet",
           href: "https://unpkg.com/notie/dist/notie.min.css",

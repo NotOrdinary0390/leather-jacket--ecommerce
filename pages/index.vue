@@ -31,6 +31,7 @@ definePageMeta({
 </script>
 
 <style scoped>
+
 .home-container {
   backdrop-filter: blur(px);
   display: flex;
@@ -45,9 +46,10 @@ definePageMeta({
   color: #fff;
   text-align: justify;
 }
+
 .hidden-link {
   /* border: 1px solid white; */
-  display: hidden;
+  display: none;
   width: 100%;
   height: 500px;
   position: absolute;
@@ -56,10 +58,10 @@ definePageMeta({
   transform: translate(-50%, 0%);
 }
 
-
 .text-home {
   text-align: center;
   font-size: 10.4pt;
   font-weight: 900;
 }
+
 </style>
