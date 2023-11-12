@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useUserStore } from '@/stores/UserStore';
 
 function pay() {
-  const url = new URL(useRuntimeConfig().public.APP_URL + '/api/payments/paypal/initialize');
+  const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/payments/paypal/initialize');
             const data = {
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,

@@ -58,7 +58,7 @@ const contactData = reactive({
 async function handleContact() {
   try {
     const response = await axios.post(
-      useRuntimeConfig().public.APP_URL + "/api/emails/contact-us",
+      useRuntimeConfig().public.APP_URL + "/proxy/emails/contact-us",
       contactData
     );
     notie.alert({ type: 'success', text: response.data.message , time: 5 });
