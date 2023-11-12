@@ -12,11 +12,15 @@
 
 <script setup>
 useHead({
-  title: "Alessandra Grimoldi - Alessandra Grimoldi",
+  title: "Alessandra Grimoldi - Luxury Leather Fashion Brand",
   meta: [
     {
-      name: "Luxury fashion brand leather jacket",
-      content: "Luxury fashion brand leather jacket",
+      name: "description",
+      content: "Explore Alessandra Grimoldi's luxury fashion collection. Discover high-quality, handcrafted leather jackets that blend timeless elegance with modern style."
+    },
+    {
+      name: "keywords",
+      content: "Alessandra Grimoldi, Luxury Fashion, Leather Jackets, High-Quality Leatherwear, Designer Jackets, Handcrafted Fashion, Elegant Leather Apparel"
     },
   ],
 });
