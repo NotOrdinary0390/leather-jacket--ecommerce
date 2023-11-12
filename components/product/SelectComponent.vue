@@ -1,7 +1,7 @@
 <template>
-  <p>Size Error: {{ isError }}</p>
-  <div class="custom-select border-gray" :class="{ 'border-red': isError }">
-    <div class="select-header" :class="{ 'error': cartStore.getSizeError }" @click="toggleOptions">
+
+  <div class="custom-select border-gray" >
+    <div class="select-header" :class="sizeError ? 'error' : '' " @click="toggleOptions">
       <span class="text-xs w-2/3 py-2 px-2">{{
         selectedSize || "Select size"
       }}</span>
@@ -24,7 +24,7 @@
       </li>
     </ul>
   </div>
-  <p>Size Error: {{ isError }}</p>
+  
 </template>
 
 <script setup>
@@ -34,13 +34,13 @@ import { onClickOutside } from "@vueuse/core";
 
 const productStore = useProductStore();
 const cartStore = useCartStore();
+const { sizeError } = storeToRefs(cartStore);
 
 // Refs
 const isOpen = ref(false);
 const selectedSize = ref(null);
 const selectSizes = ref(null);
-
-const isError = computed(() => cartStore.getSizeError);
+// const isError = ref(false);
 
 function toggleOptions(event) {
   event.stopPropagation();
@@ -57,6 +57,10 @@ function selectSize(id, size) {
 onClickOutside(selectSizes, (e) => {
   isOpen.value = false;
 });
+
+ watch( sizeError, (l) => {
+  console.log(l)
+ })
 </script>
 
 <style scoped>
@@ -96,6 +100,8 @@ onClickOutside(selectSizes, (e) => {
   border:1px solid red;
 }
 .error {
-  background-color: #f40808b9;
+  background-color: #f4080821;
+  border: 1px solid red;
+  color: red;
 }
 </style>

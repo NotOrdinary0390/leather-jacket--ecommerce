@@ -16,16 +16,14 @@ export const useCartStore = defineStore('CartStore', {
             stock_id: null,
             quantity: 1,
             product_price: useProductStore().currentVariation?.price,
-            sizeError: false,
         },
         loading: true,
+        sizeError: false,
     }),
 
     // Define getters
     getters: {
-        getSizeError() {
-            return this.cartItem.sizeError;
-        },
+       
     },
 
     actions: {
@@ -52,6 +50,7 @@ export const useCartStore = defineStore('CartStore', {
                 .then(response => {
 
                     this.loadCartItems();
+                    this.sizeError = false;
 
                 })
                 .catch(error => {
@@ -61,11 +60,8 @@ export const useCartStore = defineStore('CartStore', {
                         //this.sizeError = error.response.data.errors.size_id[0];
                         this.sizeError = true;
                         console.log(this.sizeError);
-                        setTimeout(() => {
-                            this.sizeError = false;
-                        }, 10000);
-                    }
-        
+                    } 
+
                 }).finally(() => {
 
                     this.loading = false; // Hides the loader after loading
