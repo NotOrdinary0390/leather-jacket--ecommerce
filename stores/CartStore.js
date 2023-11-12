@@ -16,41 +16,63 @@ export const useCartStore = defineStore('CartStore', {
             stock_id: null,
             quantity: 1,
             product_price: useProductStore().currentVariation?.price,
+            sizeError: false,
         },
         loading: true,
     }),
 
     // Define getters
     getters: {
-
+        getSizeError() {
+            return this.cartItem.sizeError;
+        },
     },
 
     actions: {
+
         //Add To Cart
         async AddToCart() {
             //console.log(this.cartItem.stock_id);
             //console.log(cartItem)
             if (useUserStore().isLoggedIn === true) {
-                // 
+                
                 this.cartItem.user_id = useUserStore().authUser.id;
                 //console.log(useUserStore().authUser)
-                this.cartItem.user_hash = null; // 
+                this.cartItem.user_hash = null; 
+
               } else {
+
                 this.cartItem.user_id = null; //
                 this.cartItem.user_hash = useCookie("userHash").value;
               }
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/add');
             return axios
+
                 .post(url.toString(), this.cartItem)
                 .then(response => {
+
                     this.loadCartItems();
+
                 })
                 .catch(error => {
-                    //
+                    // const fullError = error.response.data;
+
+                    if(error.response.data.errors.size_id) {
+                        //this.sizeError = error.response.data.errors.size_id[0];
+                        this.sizeError = true;
+                        console.log(this.sizeError);
+                        setTimeout(() => {
+                            this.sizeError = false;
+                        }, 10000);
+                    }
+        
                 }).finally(() => {
+
                     this.loading = false; // Hides the loader after loading
+
                 });
         },
+
         // Load items Cart 
         async loadCartItems() {
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart');
@@ -86,6 +108,7 @@ export const useCartStore = defineStore('CartStore', {
                     this.loading = false; // Hides the loader after loading
                 });
         },
+
         // Remove item Cart 
         async removeCartItem(stock_id, quantity, size_id, product_price) {
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/remove');
@@ -112,5 +135,6 @@ export const useCartStore = defineStore('CartStore', {
                     this.cartItems = [];
                 });
         },
+        
     }
 });
