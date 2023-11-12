@@ -75,27 +75,27 @@ onMounted( async () => {
 
 @font-face {
   font-family: "Gotham";
-  font-display: auto;
+  font-display: swap;
   src: local("Gotham"),
   url(../font/Gotham-Font/Gotham-Light.otf) format("opentype");
 }
 
 @font-face {
   font-family: "Gotham-medium";
-  font-display: auto;
+  font-display: swap;
   src: local("Gotham"),
   url(../font/Gotham-Font/GothamMedium.ttf) format("truetype");
 }
 
 @font-face {
   font-family: "Gotham-bold";
-  font-display: auto;
+  font-display: swap;
   src: local("Gotham"),
   url(../font/Gotham-Font/Gotham-Bold.otf) format("opentype");
 }
 
 @font-face {
-  font-display: auto;
+  font-display: swap;
   font-family: 'Material Symbols Outlined';
   font-style: normal;
   font-weight: 400;
