@@ -16,7 +16,7 @@
           close
         </span>
       </div>
-      <div class="ml-4 mt-4 px-1">
+      <div class="ml-4 mt-4 px-1 max-[500px]:mb-5">
         <ul>
           <li class="my-6">
             <nuxtLink to="/shop" @click="toggleMenu">SHOP</nuxtLink>
@@ -72,7 +72,7 @@
             >
           </li>
         </ul>
-        <p class="mt-28 text-xs">
+        <p class="mt-28 max-[500px]:mt-12 text-xs">
           info@alessandragrimoldi.com | Phone +39 351 7116761
         </p>
         <p class="text-xs">
