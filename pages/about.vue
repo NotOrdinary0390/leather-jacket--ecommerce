@@ -3,10 +3,10 @@
   <hr />
   <div class="container-app">
     <!-- <div v-html="about.content?.rendered" class="font-primary"></div> -->
-    <img
-      src="../public/images/about-me.webp"
+    <nuxt-img
+      src="/images/about-me.webp"
       alt="alessandra grimoldi stylist leather jacket"
-      class="mx-auto"
+      class="mx-auto w-full md:w-1/2"
     />
     <div class="text-about font-primary">
       <p class="mt-12">
