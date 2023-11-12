@@ -82,7 +82,7 @@
       to="/"
       class="w-[245px] max-[500px]:w-[225px] max-[410px]:w-[205px]"
     >
-      <nuxt-img src="/images/logo.png" />
+      <img src="/images/logo.png" alt="AlessandraGrimoldi.com Logo" />
     </nuxt-link>
 
     <Nuxt-link to="/cart">

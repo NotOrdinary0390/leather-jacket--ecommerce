@@ -7,7 +7,7 @@
   <div class="border border-black mt-2 mb-3"></div>
 
   <div class="mt-8 border border-black w-fit" @click="pay">
-    <nuxt-img src="/images/paypal.webp" class="img-payment" />
+    <img src="/images/paypal.webp" alt="PayPal payment image" class="img-payment" />
   </div>
 </template>
 
