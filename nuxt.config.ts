@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import axios from "axios";
+
 export default defineNuxtConfig({
+  site: {
+    url: process.env.APP_URL,
+  },
   devtools: { enabled: true },
   components: [
     {
@@ -63,5 +68,39 @@ export default defineNuxtConfig({
       ],
     },
   },
-  modules: ["@nuxt/image", '@pinia/nuxt',]
+  sitemap: {
+    cacheMaxAgeSeconds: 360, // 1 hour
+    urls: async () => {
+      const products = await axios.get(process.env.API_URL + '/products?no-paginate');
+      const posts = await axios.get(process.env.API_URL + '/posts?no-paginate');
+      const urls = [];
+
+      for (const product of products.data.data.data) {
+        if (product.slug) {
+          urls.push({
+            url: `/product/${product.slug}`,
+            changefreq: 'weekly',
+            priority: 0.8,
+          });
+        }
+      }
+
+      for (const post of posts.data.data.data) {
+        if (post.slug) {
+          urls.push({
+            url: `/posts/${post.slug}`,
+            changefreq: 'weekly',
+            priority: 0.8,
+          });
+        }
+      }
+
+      return urls;
+    },
+  },
+  modules: [
+      '@nuxt/image',
+      '@pinia/nuxt',
+      'nuxt-simple-sitemap'
+  ]
 });
