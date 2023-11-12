@@ -29,10 +29,10 @@
           </p>
         </div>
         <div v-if="showLoginForm">
-          <AccountSignInComponent />
+          <SignInComponent />
         </div>
         <div v-if="showRegisterForm" class="">
-          <AccountRegisterComponent />
+          <RegisterComponent />
         </div>
       </div>
     </div>
