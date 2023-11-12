@@ -40,13 +40,13 @@
         </p>
       </div>
       <div v-if="showOrderSection" class="mt-8">
-        <ProfileOrderComponente />
+        <OrderComponente />
       </div>
       <div v-if="showAdresseSection" class="mt-8">
-        <ProfileAddressesComponent />
+        <AddressesComponent />
       </div>
       <div v-if="showAccountDetailSection" class="mt-8">
-        <ProfileAccountDeatilsComponent />
+        <AccountDeatilsComponent />
       </div>
     </div>
   </div>

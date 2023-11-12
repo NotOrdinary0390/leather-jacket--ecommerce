@@ -45,7 +45,7 @@ const formatNewsDateCustom = (dateString) => {
 const loadNews = () => {
   loading.value = true; //  Set the loader during loading.
   axios
-    .get(useRuntimeConfig().public.APP_URL + "/api/posts")
+    .get(useRuntimeConfig().public.APP_URL + "/proxy/posts")
     .then((response) => {
       posts.value = response.data.data.data;
       console.log(response.data.data);

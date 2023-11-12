@@ -9,14 +9,14 @@
     </div>
     <div v-else class="font-primary">
       <div class="flex flex-wrap">
-        <ShopCardProducts
+        <CardProducts
           v-for="variation in products.map((product) => product.stocks).flat()"
           :key="variation.id"
           :variation="variation"
           :slug="variation.product.slug"
         >
           
-        </ShopCardProducts>
+        </CardProducts>
       </div>
     </div>
   </div>

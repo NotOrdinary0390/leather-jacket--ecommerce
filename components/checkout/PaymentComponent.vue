@@ -7,7 +7,7 @@
   <div class="border border-black mt-2 mb-3"></div>
 
   <div class="mt-8 border border-black w-fit" @click="pay">
-    <nuxt-img src="/images/paypal.webp" class="img-payment" />
+    <img src="/images/paypal.webp" alt="PayPal payment image" class="img-payment" />
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useUserStore } from '@/stores/UserStore';
 
 function pay() {
-  const url = new URL(useRuntimeConfig().public.APP_URL + '/api/payments/paypal/initialize');
+  const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/payments/paypal/initialize');
             const data = {
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,

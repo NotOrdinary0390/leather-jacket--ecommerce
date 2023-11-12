@@ -12,7 +12,7 @@
       >
         <h1 class="font-wheightbold">{{ collection.name }}</h1>
         <div class="flex flex-wrap max-[500px]:flex-wrap">
-          <ShopCardProducts
+          <CardProducts
             v-for="variation in collectionsStore.getVariations(collection)"
             :key="variation.id"
             :variation="variation"

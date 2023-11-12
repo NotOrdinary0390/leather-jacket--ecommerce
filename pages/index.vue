@@ -12,11 +12,15 @@
 
 <script setup>
 useHead({
-  title: "Alessandra Grimoldi - Alessandra Grimoldi",
+  title: "Alessandra Grimoldi - Luxury Leather Fashion Brand",
   meta: [
     {
-      name: "Luxury fashion brand leather jacket",
-      content: "Luxury fashion brand leather jacket",
+      name: "description",
+      content: "Explore Alessandra Grimoldi's luxury fashion collection. Discover high-quality, handcrafted leather jackets that blend timeless elegance with modern style."
+    },
+    {
+      name: "keywords",
+      content: "Alessandra Grimoldi, Luxury Fashion, Leather Jackets, High-Quality Leatherwear, Designer Jackets, Handcrafted Fashion, Elegant Leather Apparel"
     },
   ],
 });
@@ -27,6 +31,7 @@ definePageMeta({
 </script>
 
 <style scoped>
+
 .home-container {
   backdrop-filter: blur(px);
   display: flex;
@@ -41,9 +46,10 @@ definePageMeta({
   color: #fff;
   text-align: justify;
 }
+
 .hidden-link {
   /* border: 1px solid white; */
-  display: hidden;
+  display: none;
   width: 100%;
   height: 500px;
   position: absolute;
@@ -52,10 +58,10 @@ definePageMeta({
   transform: translate(-50%, 0%);
 }
 
-
 .text-home {
   text-align: center;
   font-size: 10.4pt;
   font-weight: 900;
 }
+
 </style>
