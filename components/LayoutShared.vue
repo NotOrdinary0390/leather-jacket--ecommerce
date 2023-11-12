@@ -65,7 +65,7 @@ onMounted( async () => {
 
 </script>
 
-<style>
+<style media="screen">
 
 .notie-container {
   z-index: 1000 !important;
