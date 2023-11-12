@@ -24,4 +24,10 @@
   font-family: "Gotham",serif;
 }
 
+@media screen and (max-width: 750px) {
+  .home-bg {
+    background-image: url("/images/bg_mobile.webp");
+  }
+}
+
 </style>
