@@ -8,7 +8,7 @@
     </div>
     <div class="flex flex-wrap">
   
-        <ShopCardProducts
+        <CardProducts
           v-for="variation in useCollectionStore().currentCollectionStocks"
           :key="variation.id"
           :variation="variation"

@@ -9,15 +9,16 @@ export const useCollectionStore = defineStore('CollectionStore', {
         collection: [],
         currentCollectionStocks: [],
         loading: true,
+        pagination: {
+            currentPage: 1,
+            lastPage: 0,
+            totalProducts: 0,
+        },
     }),
 
     // Define getters
     getters: {
-        // getVariations: (state) => {
-        //     const products = state.collections.map(collection => collection.products).flat();
-        //     const variations = products.map(product => product.stocks).flat();
-        //     return variations
-        // }
+
     },
 
     actions: {
@@ -28,15 +29,18 @@ export const useCollectionStore = defineStore('CollectionStore', {
                 "year": "",
                 "products": "",
                 "images": "",
+                "page": this.pagination.currentPage,
             };
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             return axios
                 .get(
-                    url,
+                    url.toString(),
                 )
                 .then(response => {
                     this.collections = response.data.data.data;
-                    console.log(this.collections)                 
+                    this.pagination.currentPage = response.data.data.meta.current_page;
+                    this.pagination.totalProducts = response.data.data.meta.total;
+                    this.pagination.lastPage = response.data.data.meta.last_page;                
                 })
                 .catch(error => {
                     this.collections = [];

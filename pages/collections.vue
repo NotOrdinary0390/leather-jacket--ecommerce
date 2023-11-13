@@ -30,6 +30,13 @@
           </div>
         </nuxt-link>
       </div>
+
+      <PaginationComponent
+        :totalProducts="useCollectionStore().pagination.totalProducts"
+        :currentPage="useCollectionStore().pagination.currentPage"
+        :lastPage="useCollectionStore().pagination.lastPage"
+        @change-page="changePage"
+      />
     </div>
   </div>
 </template>

@@ -9,7 +9,12 @@ export const useProductStore = defineStore('ProductStore', {
         product: {},
         productVariations: [],
         currentVariation: {},
-        loading: true
+        loading: true,
+        pagination: {
+            currentPage: 1,
+            lastPage: 0,
+            totalProducts: 0,
+        },
     }),
 
     // Define getters
@@ -20,14 +25,17 @@ export const useProductStore = defineStore('ProductStore', {
     actions: {
 
         // Load Products from category id 
-        async loadProducts(categoryId, page = 1) {
+        async loadProducts(categoryId) {
 
             axios.post('/api/products', {
-                page: page,
+                page: this.pagination.currentPage,
                 category_id: categoryId,
             })
                 .then(response => {
-                    this.products = response.data;
+                    this.products = response.data.data;
+                    this.pagination.currentPage = response.data.meta.current_page;
+                    this.pagination.totalProducts = response.data.meta.total;
+                    this.pagination.lastPage = response.data.meta.last_page;
                 }).finally(() => {
                     this.loading = false;
                 });

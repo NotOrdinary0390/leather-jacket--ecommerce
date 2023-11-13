@@ -11,7 +11,8 @@
           class="select-section border-gray"
           :class="{
             'bg-black text-white': isSelectedCategory(category),
-            'bg-gray-50 text-gray-400 border-gray-400': !isSelectedCategory(category),
+            'bg-gray-50 text-gray-400 border-gray-400':
+              !isSelectedCategory(category),
           }"
           @click="showCategory(category.id)"
         >
@@ -25,11 +26,18 @@
     <div v-else class="mx-auto">
       <div class="flex flex-wrap">
         <CardProducts
-            v-for="variation in useProductStore().getVariations"
-            :key="variation.id"
-            :variation="variation"
+          v-for="variation in useProductStore().getVariations"
+          :key="variation.id"
+          :variation="variation"
         />
       </div>
+
+      <PaginationComponent
+        :totalProducts="useProductStore().pagination.totalProducts"
+        :currentPage="useProductStore().pagination.currentPage"
+        :lastPage="useProductStore().pagination.lastPage"
+        @change-page="changePage"
+      />
     </div>
   </div>
 </template>
@@ -48,20 +56,26 @@ const selectedCategoryId = ref(null);
   -----------------*/
 const showCategory = (id) => {
   selectedCategoryId.value = id;
-  useProductStore().loadProducts(selectedCategoryId.value)
+  useProductStore().loadProducts(selectedCategoryId.value);
 };
 
 const isSelectedCategory = (category) => {
   return selectedCategoryId.value === category.id;
 };
 
-onMounted(() => {
-  useCategoryStore().loadCategories().then(() => {
-    const firstCategoryId = useCategoryStore().categories[0].id;
-    showCategory(firstCategoryId);
-  });
-});
+const changePage = (pageNumber) => {
+  useProductStore().pagination.currentPage = pageNumber
+  useProductStore().loadProducts(selectedCategoryId.value);
+};
 
+onMounted(() => {
+  useCategoryStore()
+    .loadCategories()
+    .then(() => {
+      const firstCategoryId = useCategoryStore().categories[0].id;
+      showCategory(firstCategoryId);
+    });
+});
 
 useHead({
   title: "Shop - Alessandra Grimoldi",
