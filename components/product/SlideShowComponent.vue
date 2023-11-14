@@ -9,7 +9,7 @@
       :key="image.id"
       :src="useRuntimeConfig().public.MEDIA_URL + image.image"
       :alt="image.image_meta"
-      class="mx-auto w-full md:min-h-[700px] object-fit"
+      class="mx-auto w-full min-[900px]:min-h-[600px] object-fit"
       :class="[{ active: index === currentIndex }, imgClasses]"
       @mouseover="stopAutoSlide"
       @mouseleave="startAutoSlide"
@@ -33,22 +33,26 @@ const handleImageFadeIn = () => {
   imgClasses.value = ["animate-fade-in"];
 };
 
-function startAutoSlide() {
-  intervalId = setInterval(nextSlide, 5000); // Start automatic slide every 5 seconds
-}
-
 function stopAutoSlide() {
   clearInterval(intervalId); // Stop automatic slide
 }
 
+function startAutoSlide() {
+  intervalId = setInterval(nextSlide, 5000); // Start automatic slide every 5 seconds
+}
+
 function prevSlide() {
+  stopAutoSlide()
   currentIndex.value =
     (currentIndex.value - 1 + useProductStore().currentVariation.images.length) %
     useProductStore().currentVariation.images.length; // Move to the previous slide
+    startAutoSlide()
 }
 
 function nextSlide() {
+  stopAutoSlide()
   currentIndex.value = (currentIndex.value + 1) % useProductStore().currentVariation.images.length; // Move to the next slide
+  startAutoSlide()
 }
 
 // Automatically start sliding images on component mount
@@ -89,10 +93,18 @@ img {
   display: block;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 850px) {
   .slideshow {
-    height: 90%;
-    width: 95%;
+    max-height: 650px;
+    width: 70%;
+    overflow: hidden;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .slideshow {
+    max-height: 800px;
+    width: 99%;
     overflow: hidden;
   }
 }
