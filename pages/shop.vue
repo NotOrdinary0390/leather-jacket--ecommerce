@@ -56,6 +56,7 @@ const selectedCategoryId = ref(null);
   -----------------*/
 const showCategory = (id) => {
   selectedCategoryId.value = id;
+  useProductStore().pagination.currentPage = 1;
   useProductStore().loadProducts(selectedCategoryId.value);
 };
 
