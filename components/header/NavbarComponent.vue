@@ -8,79 +8,81 @@
     </span>
     <!-- Menu -->
     <nav ref="menu" class="menu" :class="{ visible: isMenuVisible }">
-      <div class="text-end">
+      <div class="overflow-y-auto h-screen mt-10 pb-[130px] sm:pb-[150px] hide-scroll">
+        <div class="text-end">
         <span
-          class="material-symbols-outlined text-2xl cursor-pointer"
-          @click="toggleMenu"
+            class="material-symbols-outlined text-2xl cursor-pointer fixed right-2 top-3"
+            @click="toggleMenu"
         >
           close
         </span>
-      </div>
-      <div class="ml-4 mt-4 px-1 max-[500px]:mb-5">
-        <ul>
-          <li class="my-6">
-            <nuxtLink to="/shop" @click="toggleMenu">SHOP</nuxtLink>
-          </li>
-          <li class="my-5">
-            <nuxtLink to="/collections" @click="toggleMenu"
+        </div>
+        <div class="ml-4 mt-4 px-1 max-[500px]:mb-5">
+          <ul>
+            <li class="my-6">
+              <nuxtLink to="/shop" @click="toggleMenu">SHOP</nuxtLink>
+            </li>
+            <li class="my-5">
+              <nuxtLink to="/collections" @click="toggleMenu"
               >COLLECTIONS</nuxtLink
-            >
-          </li>
-          <li class="my-6">
-            <nuxtLink to="/lookbook" @click="toggleMenu"
+              >
+            </li>
+            <li class="my-6">
+              <nuxtLink to="/lookbook" @click="toggleMenu"
               >FW23 LOOKBOOK</nuxtLink
-            >
-          </li>
-          <li class="my-6">
-            <nuxtLink to="/news" @click="toggleMenu">NEWS</nuxtLink>
-          </li>
-          <li class="my-6">
-            <nuxtLink to="/about" @click="toggleMenu">ABOUT</nuxtLink>
-          </li>
-          <li class="my-6">
-            <nuxtLink to="/stores" @click="toggleMenu">STORES</nuxtLink>
-          </li>
-          <li class="my-6">
-            <nuxtLink to="/celebrities" @click="toggleMenu"
+              >
+            </li>
+            <li class="my-6">
+              <nuxtLink to="/news" @click="toggleMenu">NEWS</nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink to="/about" @click="toggleMenu">ABOUT</nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink to="/stores" @click="toggleMenu">STORES</nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink to="/celebrities" @click="toggleMenu"
               >CELEBRITIES</nuxtLink
-            >
-          </li>
-          <li class="my-6 flex items-center">
-            <nuxtLink to="/account" @click="toggleMenu">ACCOUNT</nuxtLink>
-            <div v-if="useUserStore().isLoggedIn" class="logged-in"></div>
-          </li>
-          <li class="my-12">
-            <SearchComponent />
-          </li>
-          <!--  -------------------------------------------------------   -->
-          <li class="mt-14 text-xs">
-            <nuxtLink to="/client-service" @click="toggleMenu"
+              >
+            </li>
+            <li class="my-6 flex items-center">
+              <nuxtLink to="/account" @click="toggleMenu">ACCOUNT</nuxtLink>
+              <div v-if="useUserStore().isLoggedIn" class="logged-in"></div>
+            </li>
+            <li class="my-12">
+              <SearchComponent />
+            </li>
+            <!--  -------------------------------------------------------   -->
+            <li class="mt-14 text-xs">
+              <nuxtLink to="/client-service" @click="toggleMenu"
               >Client Service</nuxtLink
-            >
-          </li>
-          <li class="my-3 text-xs">
-            <nuxtLink to="/contact-us" @click="toggleMenu">Contact Us</nuxtLink>
-          </li>
-          <li class="my-3 text-xs">
-            <nuxtLink to="/privacy-policy" @click="toggleMenu"
+              >
+            </li>
+            <li class="my-3 text-xs">
+              <nuxtLink to="/contact-us" @click="toggleMenu">Contact Us</nuxtLink>
+            </li>
+            <li class="my-3 text-xs">
+              <nuxtLink to="/privacy-policy" @click="toggleMenu"
               >Privacy Policy</nuxtLink
-            >
-          </li>
-          <li class="my-3 text-xs">
-            <nuxtLink to="https://www.instagram.com/alegrimoldi/"
+              >
+            </li>
+            <li class="my-3 text-xs">
+              <nuxtLink to="https://www.instagram.com/alegrimoldi/"
               >Instagram</nuxtLink
-            >
-          </li>
-        </ul>
-        <p class="mt-28 max-[500px]:mt-12 text-xs">
-          info@alessandragrimoldi.com | Phone +39 351 7116761
-        </p>
-        <p class="text-xs">
-          Returns address: Via Tiziano 21 - 20145 - Milano | VAT 03542920123
-        </p>
-        <p class="mt-2 text-sm">
-          © 2023 Alessandra Grimoldi All Rights Reserved
-        </p>
+              >
+            </li>
+          </ul>
+          <p class="mt-28 max-[500px]:mt-12 text-xs">
+            info@alessandragrimoldi.com | Phone +39 351 7116761
+          </p>
+          <p class="text-xs">
+            Returns address: Via Tiziano 21 - 20145 - Milano | VAT 03542920123
+          </p>
+          <p class="mt-2 text-sm">
+            © 2023 Alessandra Grimoldi All Rights Reserved
+          </p>
+        </div>
       </div>
     </nav>
 
@@ -106,15 +108,18 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
 import { useCartStore } from "@/stores/CartStore";
 import { useUserStore } from "@/stores/UserStore";
+import { useSwipe } from "@vueuse/core";
 
 /*------------------------
   Define reactive variables
   -------------------------*/
-const isMenuVisible = ref("");
+const isMenuVisible = ref(false);
 const cartLength = ref(0);
+const menu = ref(null)
+
+const { isSwiping } = useSwipe(menu)
 
 /* --------------- 
   Define functions 
@@ -125,9 +130,18 @@ const toggleMenu = () => {
 };
 
 watchEffect(() => {
-  //console.log(useCartStore().cartItems)
   cartLength.value = useCartStore().cartItems.length;
+
+  if (process.client) {
+    if (isSwiping.value) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }
+
 });
+
 </script>
 
 <style scoped>

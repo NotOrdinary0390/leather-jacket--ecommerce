@@ -1,7 +1,7 @@
 <template>
   <NavbarComponent />
   <div class="my-24">
-    <main>
+    <main class="main-body">
       <slot />
     </main>
   </div>
@@ -15,6 +15,7 @@
 body {
   background-color: #fff;
   font-family: "Gotham",serif;
+  overflow-y: hidden !important;
 }
 
 </style>

@@ -2,7 +2,7 @@
   <div class="home-bg h-[1000px] w-full">
     <NavbarComponentHome />
     <div>
-      <main>
+      <main class="main-body">
         <slot />
       </main>
     </div>
@@ -13,7 +13,11 @@
 <script setup>
 </script>
 
-<style scoped>
+<style>
+
+body {
+  overflow-y: hidden !important;
+}
 
 .home-bg {
   background-image: url("/images/bg.webp");

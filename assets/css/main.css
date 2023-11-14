@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.main-body {
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+}
+
 .container-app {
     /* border: 1px solid red ; */
     max-width: 1280px;
@@ -23,7 +28,6 @@
   left: -110%;
   top: 70px;
   padding: 1em;
-  overflow-y: auto; 
   max-height: 100vh;
   transition: left 0.7s ease;
 }
@@ -36,6 +40,15 @@
   .menu {
     width: 49%;
   }
+}
+
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .logged-in {
