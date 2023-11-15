@@ -24,7 +24,6 @@ export default defineEventHandler(async (event) => {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     const cacheKey = 'products:' + md5(JSON.stringify(params));
-    redis.del('products:' + md5(JSON.stringify(params)))
 
     // eslint-disable-next-line no-undef
     if (useRuntimeConfig().public.ENABLE_CACHE === false) {
