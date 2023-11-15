@@ -1,5 +1,5 @@
 <template>
-  <div class="home-bg h-[1000px] w-full">
+  <div class="home-bg h-screen w-full">
     <NavbarComponentHome />
     <div>
       <main class="main-body">

@@ -1,116 +1,71 @@
 <template>
-  <div class="slideshow mx-auto min-[750px]:mx-3">
-    <div class="flex justify-between">
-      <button @click="prevSlide">
-        Previous
-      </button>
-      <button @click="nextSlide">
-        Next
-      </button> 
+  <div class="mx-auto min-[750px]:mx-3 w-full md:w-[45%] h-[90%] overflow-hidden">
+    <div class="glide relative w-full">
+      <!-- Slider buttons start -->
+      <div
+        class="glide__arrows flex justify-between"
+        data-glide-el="controls"
+      >
+        <button
+          class="glide__arrow glide__arrow--left"
+          data-glide-dir="<"
+        >
+          prev
+        </button>
+        <button
+          class="glide__arrow glide__arrow--right"
+          data-glide-dir=">"
+        >
+          next
+        </button>
+      </div>
+      <!-- Slider buttons end -->
+
+      <!-- Main slider start -->
+      <div
+        class="glide__track w-full"
+        data-glide-el="track"
+      >
+        <ul class="glide__slides w-full">
+          <li
+            v-for="image in useProductStore().currentVariation.images"
+            :key="image.id"
+            class="glide__slide w-full"
+          >
+            <nuxt-img
+              :src="useRuntimeConfig().public.MEDIA_URL + image.image"
+              :alt="image.image_meta"
+              class="mx-auto w-full min-[900px]:min-h-[600px] object-fit"
+            />
+          </li>
+        </ul>
+      </div>
+      <!-- Main slider end -->
     </div>
-    <nuxt-img
-      v-for="(image, index) in useProductStore().currentVariation.images"
-      :key="image.id"
-      :src="useRuntimeConfig().public.MEDIA_URL + image.image"
-      :alt="image.image_meta"
-      class="mx-auto w-full min-[900px]:min-h-[600px] object-fit"
-      :class="[{ active: index === currentIndex }, imgClasses]"
-      @mouseover="stopAutoSlide"
-      @mouseleave="startAutoSlide"
-      @load="handleImageFadeIn"
-    />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useProductStore } from "~/stores/ProductStore";
-
-// Initialize a ref to track the currently displayed image
-const currentIndex = ref(0);
-
-let intervalId = null;
-
-const imgClasses = ref([]);
-
-const handleImageFadeIn = () => {
-  imgClasses.value = ["animate-fade-in"];
-};
-
-function stopAutoSlide() {
-  clearInterval(intervalId); // Stop automatic slide
-}
-
-function startAutoSlide() {
-  intervalId = setInterval(nextSlide, 5000); // Start automatic slide every 5 seconds
-}
-
-function prevSlide() {
-  stopAutoSlide()
-  currentIndex.value =
-    (currentIndex.value - 1 + useProductStore().currentVariation.images.length) %
-    useProductStore().currentVariation.images.length; // Move to the previous slide
-    startAutoSlide()
-}
-
-function nextSlide() {
-  stopAutoSlide()
-  currentIndex.value = (currentIndex.value + 1) % useProductStore().currentVariation.images.length; // Move to the next slide
-  startAutoSlide()
-}
+import { useProductStore } from "@/stores/ProductStore";
+import Glide from '@glidejs/glide';
+import '@glidejs/glide/dist/css/glide.core.min.css';
 
 // Automatically start sliding images on component mount
-onMounted(startAutoSlide);
+onMounted(() => {
+  new Glide('.glide', {
+    type: 'carousel',
+    startAt: 0,
+    autoplay: 5000,
+    focusAt: 'center',
+  }).mount();
+});
 
 </script>
 
 <style scoped>
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.slideshow {
-  height: 90%;
-  width: 45%;
-  overflow: hidden;
-}
-
 img {
   object-fit: cover;
-}
-
-.slideshow img {
-  display: none;
-}
-
-.slideshow img.active {
-  display: block;
-}
-
-@media screen and (max-width: 850px) {
-  .slideshow {
-    max-height: 650px;
-    width: 70%;
-    overflow: hidden;
-  }
-}
-
-@media screen and (max-width: 630px) {
-  .slideshow {
-    max-height: 800px;
-    width: 99%;
-    overflow: hidden;
-  }
 }
 
 </style>

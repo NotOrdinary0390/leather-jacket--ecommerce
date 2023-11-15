@@ -132,7 +132,8 @@
             Returns address: Via Tiziano 21 - 20145 - Milano | VAT 03542920123
           </p>
           <p class="mt-2 text-sm">
-            © 2023 Alessandra Grimoldi All Rights Reserved
+            © 2023 Alessandra Grimoldi All Rights Reserved by
+            <a href="https://fastconfig.it"><span class="font-wheightbold underline text-[12.2pt]">fastconfig.it</span></a>
           </p>
         </div>
       </div>

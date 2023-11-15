@@ -2,12 +2,7 @@
   <div class="container-app font-primary">
     <div v-if="!productStore.loading">
       <div v-if="product">
-        <div class="min-[750px]:block hidden">
-          <DesktopSingleProductComponent :product="product" />
-        </div>
-        <div class="block min-[750px]:hidden">
-          <MobileSingleProductComponent :product="product" />
-        </div>
+        <SingleProductComponent :product="product" />
       </div>
     </div>
 
