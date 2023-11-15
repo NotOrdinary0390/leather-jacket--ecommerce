@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto min-[750px]:mx-3 w-full md:w-[45%] h-[90%] overflow-hidden">
+  <div class="mx-auto min-[750px]:mx-3 w-full md:w-[45%] overflow-hidden">
     <div class="glide relative w-full">
       <!-- Slider buttons start -->
       <div
@@ -35,7 +35,7 @@
             <nuxt-img
               :src="useRuntimeConfig().public.MEDIA_URL + image.image"
               :alt="image.image_meta"
-              class="mx-auto w-full min-[900px]:min-h-[600px] object-fit"
+              class="mx-auto w-full min-[900px]:min-h-[600px] object-contain"
             />
           </li>
         </ul>
@@ -51,13 +51,25 @@ import Glide from '@glidejs/glide';
 import '@glidejs/glide/dist/css/glide.core.min.css';
 
 // Automatically start sliding images on component mount
+let mountSlider = new Glide('.glide', {
+  type: 'carousel',
+  startAt: 0,
+  autoplay: 5000
+});
+
 onMounted(() => {
-  new Glide('.glide', {
-    type: 'carousel',
-    startAt: 0,
-    autoplay: 5000,
-    focusAt: 'center',
-  }).mount();
+  mountSlider.mount();
+});
+
+watch(() => useProductStore().currentVariation, () => {
+  mountSlider.destroy();
+  setTimeout(() => {
+    mountSlider = new Glide('.glide', {
+      type: 'carousel',
+      startAt: 0,
+      autoplay: 5000
+    }).mount();
+  }, 200);
 });
 
 </script>
