@@ -41,13 +41,15 @@ export const useCartStore = defineStore('CartStore', {
               } else {
 
                 this.cartItem.user_id = null; //
+                // eslint-disable-next-line no-undef
                 this.cartItem.user_hash = useCookie("userHash").value;
               }
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/add');
             return axios
 
                 .post(url.toString(), this.cartItem)
-                .then(response => {
+                .then(() => {
 
                     this.loadCartItems();
                     this.sizeError = false;
@@ -71,12 +73,14 @@ export const useCartStore = defineStore('CartStore', {
 
         // Load items Cart 
         async loadCartItems() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart');
             const params = {
                 //
             };
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             const data = {
+                // eslint-disable-next-line no-undef
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,
             }
@@ -90,15 +94,17 @@ export const useCartStore = defineStore('CartStore', {
                     this.cartTotal = response.data.data.total_price;
                     console.log(this.cartItems)
                     if (this.cartItems.length > 0) {
+                        // eslint-disable-next-line no-undef
                         const canCheckout = useCookie("canCheckout")
                         canCheckout.value = "true";
                     } else {
+                        // eslint-disable-next-line no-undef
                         const canCheckout = useCookie("canCheckout")
                         canCheckout.value = null;
                     }
                     //console.log(response.data)
                 })
-                .catch(error => {
+                .catch(() => {
                     this.cartItems = [];
                 }).finally(() => {
                     this.loading = false; // Hides the loader after loading
@@ -107,12 +113,14 @@ export const useCartStore = defineStore('CartStore', {
 
         // Remove item Cart 
         async removeCartItem(stock_id, quantity, size_id, product_price) {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/remove');
             const params = {
                 //
             };
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             const data = {
+                // eslint-disable-next-line no-undef
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,
                 "stock_id": stock_id,
@@ -122,12 +130,12 @@ export const useCartStore = defineStore('CartStore', {
             }
             return axios
                 .post(
-                    url, data
+                    url.toString(), data
                 )
-                .then(response => {
+                .then(() => {
                     this.loadCartItems();
                 })
-                .catch(error => {
+                .catch(() => {
                     this.cartItems = [];
                 });
         },

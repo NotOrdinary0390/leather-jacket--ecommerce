@@ -7,70 +7,122 @@
       {{ isMenuVisible ? "close" : "menu" }}
     </span>
     <!-- Menu -->
-    <nav ref="menu" class="menu" :class="{ visible: isMenuVisible }">
+    <nav
+      ref="menu"
+      class="menu"
+      :class="{ visible: isMenuVisible }"
+    >
       <div class="overflow-y-auto h-screen mt-10 pb-[130px] sm:pb-[150px] hide-scroll">
         <div class="text-end">
-        <span
+          <span
             class="material-symbols-outlined text-2xl cursor-pointer fixed right-2 top-3"
             @click="toggleMenu"
-        >
-          close
-        </span>
+          >
+            close
+          </span>
         </div>
         <div class="ml-4 mt-4 px-1 max-[500px]:mb-5">
           <ul>
             <li class="my-6">
-              <nuxtLink to="/shop" @click="toggleMenu">SHOP</nuxtLink>
+              <nuxtLink
+                to="/shop"
+                @click="toggleMenu"
+              >
+                SHOP
+              </nuxtLink>
             </li>
             <li class="my-5">
-              <nuxtLink to="/collections" @click="toggleMenu"
-              >COLLECTIONS</nuxtLink
+              <nuxtLink
+                to="/collections"
+                @click="toggleMenu"
               >
+                COLLECTIONS
+              </nuxtLink>
             </li>
             <li class="my-6">
-              <nuxtLink to="/lookbook" @click="toggleMenu"
-              >FW23 LOOKBOOK</nuxtLink
+              <nuxtLink
+                to="/lookbook"
+                @click="toggleMenu"
               >
+                FW23 LOOKBOOK
+              </nuxtLink>
             </li>
             <li class="my-6">
-              <nuxtLink to="/news" @click="toggleMenu">NEWS</nuxtLink>
-            </li>
-            <li class="my-6">
-              <nuxtLink to="/about" @click="toggleMenu">ABOUT</nuxtLink>
-            </li>
-            <li class="my-6">
-              <nuxtLink to="/stores" @click="toggleMenu">STORES</nuxtLink>
-            </li>
-            <li class="my-6">
-              <nuxtLink to="/celebrities" @click="toggleMenu"
-              >CELEBRITIES</nuxtLink
+              <nuxtLink
+                to="/news"
+                @click="toggleMenu"
               >
+                NEWS
+              </nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink
+                to="/about"
+                @click="toggleMenu"
+              >
+                ABOUT
+              </nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink
+                to="/stores"
+                @click="toggleMenu"
+              >
+                STORES
+              </nuxtLink>
+            </li>
+            <li class="my-6">
+              <nuxtLink
+                to="/celebrities"
+                @click="toggleMenu"
+              >
+                CELEBRITIES
+              </nuxtLink>
             </li>
             <li class="my-6 flex items-center">
-              <nuxtLink to="/account" @click="toggleMenu">ACCOUNT</nuxtLink>
-              <div v-if="useUserStore().isLoggedIn" class="logged-in"></div>
+              <nuxtLink
+                to="/account"
+                @click="toggleMenu"
+              >
+                ACCOUNT
+              </nuxtLink>
+              <div
+                v-if="useUserStore().isLoggedIn"
+                class="logged-in"
+              />
             </li>
             <li class="my-12">
               <SearchComponent />
             </li>
             <!--  -------------------------------------------------------   -->
             <li class="mt-14 text-xs">
-              <nuxtLink to="/client-service" @click="toggleMenu"
-              >Client Service</nuxtLink
+              <nuxtLink
+                to="/client-service"
+                @click="toggleMenu"
               >
+                Client Service
+              </nuxtLink>
             </li>
             <li class="my-3 text-xs">
-              <nuxtLink to="/contact-us" @click="toggleMenu">Contact Us</nuxtLink>
+              <nuxtLink
+                to="/contact-us"
+                @click="toggleMenu"
+              >
+                Contact Us
+              </nuxtLink>
             </li>
             <li class="my-3 text-xs">
-              <nuxtLink to="/privacy-policy" @click="toggleMenu"
-              >Privacy Policy</nuxtLink
+              <nuxtLink
+                to="/privacy-policy"
+                @click="toggleMenu"
               >
+                Privacy Policy
+              </nuxtLink>
             </li>
             <li class="my-3 text-xs">
-              <nuxtLink to="https://www.instagram.com/alegrimoldi/"
-              >Instagram</nuxtLink
-              >
+              <nuxtLink to="https://www.instagram.com/alegrimoldi/">
+                Instagram
+              </nuxtLink>
             </li>
           </ul>
           <p class="mt-28 max-[500px]:mt-12 text-xs">
@@ -90,12 +142,20 @@
       to="/"
       class="w-[245px] max-[500px]:w-[225px] max-[410px]:w-[205px]"
     >
-      <img src="/images/logo.png" alt="AlessandraGrimoldi.com Logo" width="887" height="194" />
+      <img
+        src="/images/logo.png"
+        alt="AlessandraGrimoldi.com Logo"
+        width="887"
+        height="194"
+      >
     </nuxt-link>
 
     <Nuxt-link to="/cart">
       <div class="mr-2 max-[500px]:mr-1 max-[350px]:mr-0">
-        <p class="number-items-cart" v-if="useCartStore().cartItems.length > 0">
+        <p
+          v-if="useCartStore().cartItems.length > 0"
+          class="number-items-cart"
+        >
           {{ cartLength }}
         </p>
         <span
@@ -140,7 +200,7 @@ watchEffect(() => {
     }
   }
 
-});
+}); 
 
 </script>
 

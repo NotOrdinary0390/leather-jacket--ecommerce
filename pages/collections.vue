@@ -1,42 +1,56 @@
 <template>
-  <div class="my-4 ml-4 text-sm">Collections</div>
-  <hr />
-  <div class="container-app">
-    <div v-if="collectionsStore.loading" class="loader-container">
-      <LoaderComponent />
+  <div>
+    <div class="my-4 ml-4 text-sm">
+      Collections
     </div>
-    <div v-else class="font-primary">
+    <hr>
+    <div class="container-app">
       <div
-        v-for="collection in collectionsStore.collections"
-        :key="collection.id"
+        v-if="collectionsStore.loading"
+        class="loader-container"
       >
-        <h1 class="font-wheightbold">{{ collection.name }}</h1>
-        <div class="flex flex-wrap max-[500px]:flex-wrap">
-          <CardProducts
-            v-for="variation in collectionsStore.getVariations(collection)"
-            :key="variation.id"
-            :variation="variation"
-          />
-        </div>
-        <nuxt-link
-          :to="'/collection/' + collection.slug"
-          :key="collection.slug"
-        >
-          <div
-            class="collection-link py-5 mx-auto mt-10 mb-20"
-            @click="setCollection(collection.slug)"
-          >
-            <p class="">VIEW MORE</p>
-          </div>
-        </nuxt-link>
+        <LoaderComponent />
       </div>
+      <div
+        v-else
+        class="font-primary"
+      >
+        <div
+          v-for="collection in collectionsStore.collections"
+          :key="collection.id"
+        >
+          <h1 class="font-wheightbold">
+            {{ collection.name }}
+          </h1>
+          <div class="flex flex-wrap max-[500px]:flex-wrap">
+            <CardProducts
+              v-for="variation in collectionsStore.getVariations(collection)"
+              :key="variation.id"
+              :variation="variation"
+            />
+          </div>
+          <nuxt-link
+            :key="collection.slug"
+            :to="'/collection/' + collection.slug"
+          >
+            <div
+              class="collection-link py-5 mx-auto mt-10 mb-20"
+              @click="setCollection(collection.slug)"
+            >
+              <p class="">
+                VIEW MORE
+              </p>
+            </div>
+          </nuxt-link>
+        </div>
 
-      <PaginationComponent
-        :totalProducts="useCollectionStore().pagination.totalProducts"
-        :currentPage="useCollectionStore().pagination.currentPage"
-        :lastPage="useCollectionStore().pagination.lastPage"
-        @change-page="changePage"
-      />
+        <PaginationComponent
+          :total-products="useCollectionStore().pagination.totalProducts"
+          :current-page="useCollectionStore().pagination.currentPage"
+          :last-page="useCollectionStore().pagination.lastPage"
+          @change-page="changePage"
+        />
+      </div>
     </div>
   </div>
 </template>

@@ -1,8 +1,12 @@
 <template>
   <div class="slideshow mx-auto min-[750px]:mx-3">
     <div class="flex justify-between">
-      <button @click="prevSlide">Previous</button>
-      <button @click="nextSlide">Next</button>
+      <button @click="prevSlide">
+        Previous
+      </button>
+      <button @click="nextSlide">
+        Next
+      </button> 
     </div>
     <nuxt-img
       v-for="(image, index) in useProductStore().currentVariation.images"

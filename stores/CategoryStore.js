@@ -16,6 +16,7 @@ export const useCategoryStore = defineStore('CategoryStore', {
     actions: {
         // Load Categories 
         async loadCategories() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/categories');
             const params = {
                 'no-paginate': '',
@@ -23,13 +24,13 @@ export const useCategoryStore = defineStore('CategoryStore', {
             Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
             return axios
                 .get(
-                    url,
+                    url.toString(),
                 )
                 .then(response => {
                     this.categories = response.data.data;
                     console.log(this.categories);
                 })
-                .catch(error => {
+                .catch(() => {
                     this.categories = [];
                 }).finally(() => {
                     this.loading = false; // Hides the loader after loading

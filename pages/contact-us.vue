@@ -2,43 +2,57 @@
   <div class="container-form">
     <form @submit.prevent="handleContact">
       <div class="form-contact">
-        <p class="mb-8 font-extratbold text-lg">Submit a request</p>
-        <label class="text-xs tracking-wider mb-2" for="email">Email *</label>
+        <p class="mb-8 font-extratbold text-lg">
+          Submit a request
+        </p>
+        <label
+          class="text-xs tracking-wider mb-2"
+          for="email"
+        >Email *</label>
         <input
-          type="email"
-          class="input-form"
           id="email"
           v-model="contactData.email"
-        />
-        <label class="text-xs tracking-wider mt-6 mb-2" for="order"
-          >Order # (optional)
+          type="email"
+          class="input-form" 
+        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="order"
+        >Order # (optional)
         </label>
         <input
-          type="text"
-          class="input-form"
-          v-model="contactData.order_number"
           id="order"
-        />
-        <label class="text-xs tracking-wider mt-6 mb-2" for="subject"
-          >Subject *</label
-        >
-        <input
+          v-model="contactData.order_number"
           type="text"
           class="input-form"
-          v-model="contactData.subject"
-          id="subject"
-        />
-        <label class="text-xs tracking-wider mt-6 mb-2" for="description"
-          >Description *</label
         >
-        <textarea
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="subject"
+        >Subject *</label>
+        <input
+          id="subject"
+          v-model="contactData.subject"
           type="text"
-          class="input-contact-text-area"
+          class="input-form"
+        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="description"
+        >Description *</label>
+        <textarea
           id="description"
           v-model="contactData.message"
+          type="text"
+          class="input-contact-text-area"
         />
 
-        <button type="submit" class="btn-form">SUBMIT</button>
+        <button
+          type="submit"
+          class="btn-form"
+        >
+          SUBMIT
+        </button>
       </div>
     </form>
   </div>

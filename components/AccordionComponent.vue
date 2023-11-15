@@ -1,11 +1,29 @@
 <template>
-  <div class="accordion-header" @click="toggleAccordion">
-    <p class="text-[9.5pt] font-wheightbold" v-html="headerText"></p>
-    <span v-if="!isOpen" class="material-symbols-outlined"> expand_more </span>
-    <span v-else class="material-symbols-outlined"> expand_less </span>
+  <div
+    class="accordion-header"
+    @click="toggleAccordion"
+  >
+    <p
+      class="text-[9.5pt] font-wheightbold"
+      v-html="props.headerText"
+    />
+    <span
+      v-if="!isOpen"
+      class="material-symbols-outlined"
+    > expand_more </span>
+    <span
+      v-else
+      class="material-symbols-outlined"
+    > expand_less </span>
   </div>
-  <div v-if="isOpen" class="accordion-content">
-    <p class="text-[9pt]" v-html="contentText"></p>
+  <div
+    v-if="isOpen"
+    class="accordion-content"
+  >
+    <p
+      class="text-[9pt]"
+      v-html="props.contentText"
+    /> 
   </div>
 </template>
 
@@ -13,8 +31,14 @@
 import { ref } from "vue";
 
 const props = defineProps({
-  headerText: String,
-  contentText: String,
+  headerText: {
+    type: String,
+    default: "Header",
+  },
+  contentText: {
+    type: String,
+    default: "Content",
+  }
 });
 
 const isOpen = ref(false);

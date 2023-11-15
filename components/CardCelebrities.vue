@@ -1,15 +1,26 @@
 <template>
   <div class="card-store">
     <div class="div-img">
-      <img :src="props.celebrity.image" :alt="props.celebrity.alt" class="img" />
+      <img
+        :src="props.celebrity.image"
+        :alt="props.celebrity.alt"
+        class="img"
+      >
     </div>
-    <p class="mt-2 font-bold">{{ props.celebrity.name }}</p>
+    <p class="mt-2 font-bold">
+      {{ props.celebrity.name }}
+    </p> 
   </div>
 </template>
 
 <script setup>
 
-const props = defineProps(["celebrity"]);
+const props = defineProps({
+  celebrity: {
+    type: Object,
+    required: true,
+  },
+});
 
 </script>
 
@@ -27,7 +38,6 @@ const props = defineProps(["celebrity"]);
 .img {
   width: 100%;
   height: 100%;
-  object-fit: top;
 }
 
 /* media queries  */

@@ -1,22 +1,28 @@
 <template>
-  <div class="my-4 ml-4 text-sm">
-    Products : {{ useSearchStore().searchTerm }}
-  </div>
-  <hr />
-  <div class="container-app">
-    <div v-if="searchStore.loading" class="loader-container">
-      <LoaderComponent />
+  <div>
+    <div class="my-4 ml-4 text-sm">
+      Products : {{ useSearchStore().searchTerm }}
     </div>
-    <div v-else class="font-primary">
-      <div class="flex flex-wrap">
-        <CardProducts
-          v-for="variation in products.map((product) => product.stocks).flat()"
-          :key="variation.id"
-          :variation="variation"
-          :slug="variation.product.slug"
-        >
-          
-        </CardProducts>
+    <hr>
+    <div class="container-app">
+      <div
+        v-if="searchStore.loading"
+        class="loader-container"
+      >
+        <LoaderComponent />
+      </div>
+      <div
+        v-else
+        class="font-primary"
+      >
+        <div class="flex flex-wrap">
+          <CardProducts
+            v-for="variation in products.map((product) => product.stocks).flat()"
+            :key="variation.id"
+            :variation="variation"
+            :slug="variation.product.slug"
+          />
+        </div>
       </div>
     </div>
   </div>

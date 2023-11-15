@@ -1,8 +1,6 @@
 <template>
   <div class="container-app font-primary">
-
     <div v-if="!productStore.loading">
-
       <div v-if="product">
         <div class="min-[750px]:block hidden">
           <DesktopSingleProductComponent :product="product" />
@@ -11,10 +9,12 @@
           <MobileSingleProductComponent :product="product" />
         </div>
       </div>
-
     </div>
 
-    <div v-if="productStore.loading" class="loader-container">
+    <div
+      v-if="productStore.loading"
+      class="loader-container"
+    >
       <LoaderComponent />
     </div>
   </div>
@@ -33,7 +33,7 @@ const route = useRoute();
 
 // Define refs
 const product = ref(null);
-const slug = ref(null);
+const slug = ref('');
 
 useHead(() => {
   return {
@@ -46,7 +46,6 @@ useHead(() => {
     ],
   };
 });
-
 
 onMounted(() => {
   // Set product slug

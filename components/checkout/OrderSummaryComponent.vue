@@ -1,24 +1,27 @@
 <template>
-
   <div class="flex justify-between items-center">
     <!-- single product cart div -->
     <div class="flex my-5">
       <img
-        :src="
+        :src=" 
           useRuntimeConfig().public.MEDIA_URL +
-          props.item.stock?.images[0].image
+            props.item.stock?.images[0].image
         "
         :alt="props.item.stock?.images[0].image_meta"
         class="w-[100px] h-[100px] object-cover"
-      />
+      >
       <!-- products cart div & info -->
       <div class="ml-3">
         <p>{{ props.item.stock.product.name }}</p>
         <p class="text-sm text-gray-400">
           {{ props.item.stock.color_name }} / {{ props.item.size.size }}
         </p>
-        <p class="text-[10pt]">Qty : {{ props.item.quantity }}</p>
-        <p class="text-[10pt]">Price : € {{ props.item.price }}</p>
+        <p class="text-[10pt]">
+          Qty : {{ props.item.quantity }}
+        </p>
+        <p class="text-[10pt]">
+          Price : € {{ props.item.price }}
+        </p>
       </div>
     </div>
 
@@ -35,7 +38,12 @@
 /*------------------------
     Define props
     -------------------------*/
-const props = defineProps(["item"]);
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true,
+  },
+});
 
 /* --------------- 
     Define functions 

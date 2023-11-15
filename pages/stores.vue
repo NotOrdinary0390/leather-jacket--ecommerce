@@ -1,12 +1,20 @@
 <template>
-  <h1 class="my-4 ml-4 text-sm">Stores</h1>
-  <hr />
-  <div class="container-app">
-    <div class="flex flex-wrap justify-center">
-      <CardStore v-for="(store, index) in stores" :key="index" :store="store" />
+  <div>
+    <h1 class="my-4 ml-4 text-sm">
+      Stores
+    </h1>
+    <hr>
+    <div class="container-app">
+      <div class="flex flex-wrap justify-center">
+        <CardStore
+          v-for="(store, index) in stores"
+          :key="index"
+          :store="store"
+        />
+      </div>
     </div>
   </div>
-</template>
+</template> 
 
 <script setup>
 // Stores 

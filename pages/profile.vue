@@ -1,7 +1,12 @@
 <template>
   <div class="bg-[#f8f7f7] min-h-[100vh] h-fit-contain">
     <div class="container-app">
-      <div class="text-end text-xs cursor-pointer underline" @click="signOut">SIGN OUT</div>
+      <div
+        class="text-end text-xs cursor-pointer underline"
+        @click="signOut"
+      >
+        SIGN OUT
+      </div>
       <p class="my-4 capitalize text-lg">
         Welcome {{ useUserStore().authUser.first_name }}
         <span class="waving-hand text-2xl ml-2">👋</span>
@@ -39,13 +44,22 @@
           Account Details
         </p>
       </div>
-      <div v-if="showOrderSection" class="mt-8">
+      <div
+        v-if="showOrderSection"
+        class="mt-8"
+      > 
         <OrderComponente />
       </div>
-      <div v-if="showAdresseSection" class="mt-8">
+      <div
+        v-if="showAdresseSection"
+        class="mt-8"
+      >
         <AddressesComponent />
       </div>
-      <div v-if="showAccountDetailSection" class="mt-8">
+      <div
+        v-if="showAccountDetailSection"
+        class="mt-8"
+      >
         <AccountDeatilsComponent />
       </div>
     </div>

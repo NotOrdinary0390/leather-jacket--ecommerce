@@ -1,21 +1,25 @@
 <template>
   <div>
-    <p class="font-extrabold text-[7pt]">QUANTITY</p>
+    <p class="font-extrabold text-[7pt]">
+      QUANTITY
+    </p>
     <div class="flex items-center mt-2">
       <button
         class="direction"
+        :disabled="counter <= 1" 
         @click="changeCounter('-')"
-        :disabled="counter <= 1"
       >
         -
       </button>
       <div class="box">
-        <p class="text-[10pt]">{{ counter }}</p>
+        <p class="text-[10pt]">
+          {{ counter }}
+        </p>
       </div>
       <button
         class="direction"
-        @click="changeCounter('+')"
         :disabled="counter >= 5"
+        @click="changeCounter('+')"
       >
         +
       </button>
@@ -47,14 +51,14 @@ watch(counter, () => {
 .box {
   width: 30px;
   height: 32px;
-  border: 0.5px solid #c4c4c4;
+  border: 1px solid #c4c4c4;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .direction {
-  border: 0.5px solid #c4c4c4;
+  border: 1px solid #c4c4c4;
   height: 32px;
   width: 1.4rem;
   display: flex;

@@ -1,22 +1,38 @@
 <template>
-  <h1 class="my-4 ml-4 text-sm">News</h1>
-  <hr class="min-[600px]:mb-16"/>
-  <div v-if="loading" class="loader-container">
-    <LoaderComponent />
-  </div>
-  <div v-else class="flex flex-wrap justify-center">
-    <div v-for="post in posts" :key="post.id" class="card">
-      <div class="div-img">
-        <img
-          :src="useRuntimeConfig().public.MEDIA_URL + post.image"
-          :alt="post.image_meta"
-          class="post-image"
-        />
+  <div>
+    <h1 class="my-4 ml-4 text-sm">
+      News
+    </h1>
+    <hr class="min-[600px]:mb-16">
+    <div
+      v-if="loading"
+      class="loader-container"
+    >
+      <LoaderComponent />
+    </div>
+    <div
+      v-else
+      class="flex flex-wrap justify-center"
+    >
+      <div
+        v-for="post in posts"
+        :key="post.id"
+        class="card"
+      >
+        <div class="div-img">
+          <img
+            :src="useRuntimeConfig().public.MEDIA_URL + post.image"
+            :alt="post.image_meta"
+            class="post-image"
+          >
+        </div>
+        <p class="text-sm mt-2">
+          {{ post.title }}
+        </p>
+        <p class="capitalize text-gray-400 text-xs">
+          {{ formatNewsDateCustom(post.created_at) }}
+        </p>
       </div>
-      <p class="text-sm mt-2"> {{ post.title }}</p>
-      <p class="capitalize text-gray-400 text-xs">
-        {{ formatNewsDateCustom(post.created_at) }}
-      </p>
     </div>
   </div>
 </template>

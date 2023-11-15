@@ -1,17 +1,31 @@
 <template>
-  <form class="search-form" @submit.prevent="searchProducts">
+  <form
+    class="search-form"
+    @submit.prevent="searchProducts"
+  >
     <div class="input-container">
       <input
         v-model="searchTerm"
         type="text"
-        placeholder="SEARCH FOR"
+        placeholder="SEARCH FOR" 
         class="input-search-nav"
-      />
-      <label for="searchIcon" class="search-icon">
-        <span id="searchIcon" class="material-symbols-outlined">search</span>
+      >
+      <label
+        for="searchIcon"
+        class="search-icon"
+      >
+        <span
+          id="searchIcon"
+          class="material-symbols-outlined"
+        >search</span>
       </label>
     </div>
-    <button type="submit" class="hidden">Search</button>
+    <button
+      type="submit"
+      class="hidden"
+    >
+      Search
+    </button>
   </form>
 </template>
 
@@ -24,7 +38,7 @@ const router = useRouter();
 
 function searchProducts() {
   useSearchStore().searchNavProducts(searchTerm.value);
-  router.push('/search-products'); // Reindirizza alla pagina search-product
+  router.push('/search-products');
 }
 </script>
 

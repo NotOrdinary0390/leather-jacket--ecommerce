@@ -45,6 +45,7 @@ export const useProductStore = defineStore('ProductStore', {
         // Load single Product from slug
         async loadSingleProduct(slug) {
             this.loading = true;
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/products/' + slug);
             const params = {
                 "stocks": "",

@@ -24,6 +24,7 @@ export const useCollectionStore = defineStore('CollectionStore', {
     actions: {
         // Load all Collections 
         async loadCollections() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections');
             const params = {
                 "year": "",
@@ -42,7 +43,7 @@ export const useCollectionStore = defineStore('CollectionStore', {
                     this.pagination.totalProducts = response.data.data.meta.total;
                     this.pagination.lastPage = response.data.data.meta.last_page;                
                 })
-                .catch(error => {
+                .catch(() => {
                     this.collections = [];
                 }).finally(() => {
                     this.loading = false; // Hides the loader after loading
@@ -50,11 +51,12 @@ export const useCollectionStore = defineStore('CollectionStore', {
         },
         // Load latest Collection 
         async loadLatestCollection() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections/look-book');
 
             return axios
                 .get(
-                    url,
+                    url.toString(),
                 )
                 .then(response => {
                     this.latestCollection = response.data.data;
@@ -69,11 +71,12 @@ export const useCollectionStore = defineStore('CollectionStore', {
         // load collection by slug
         async getCollectionBySlug(collectionSlug) {
 
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/collections/${collectionSlug}`);
 
             return axios
                 .get(
-                    url,
+                    url.toString(),
                 )
                 .then(response => {
                     this.collection = response.data.data;

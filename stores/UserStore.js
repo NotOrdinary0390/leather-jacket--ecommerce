@@ -34,10 +34,10 @@ export const useUserStore = defineStore('UserStore', {
     actions: {
         //Register new user
         async registerUser(registrationData) {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/register');
-            await axios.post(url, registrationData)
+            await axios.post(url.toString(), registrationData)
                 .then(response => {
-                    console.log(response.data),
                         this.registerMessage = response.data.message
                 })
                 .catch(error => {
@@ -66,16 +66,18 @@ export const useUserStore = defineStore('UserStore', {
         },
         //Login user
         async loginUser(loginData) {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/login');
             try {
-                const response = await axios.post(url, loginData);
+                const response = await axios.post(url.toString(), loginData);
                 const userData = response.data;
 
                 if (userData && userData.data && userData.data.token) {
+                    // eslint-disable-next-line no-undef
                     const accessToken = useCookie("accessToken", { maxAge: 172800 });
                     accessToken.value = userData.data.token;
                     this.isLoggedIn = true;
-                    this.getUser();
+                    await this.getUser();
                 }
 
             } catch (error) {
@@ -95,12 +97,14 @@ export const useUserStore = defineStore('UserStore', {
                 }
             }
         },
-        // Get the logged in user
+        // Get the logged-in user
         async getUser() {
+            // eslint-disable-next-line no-undef
             if (useCookie("accessToken").value) {
                 try {
                     const userResponse = await axios.get('/proxy/users/auth', {
                         headers: {
+                            // eslint-disable-next-line no-undef
                             Authorization: `Bearer ${useCookie("accessToken").value}`
                         }
                     });
@@ -118,28 +122,29 @@ export const useUserStore = defineStore('UserStore', {
         async sendPasswordReset(resetEmail) {
             console.log(resetEmail)
             axios
+                // eslint-disable-next-line no-undef
                 .post(useRuntimeConfig().public.APP_URL + "/proxy/users/forgot-password", {
                     email: resetEmail,
                 })
-                .then((response) => {
+                .then(() => {
                     this.resetMessage = "Reset Password sent successfull"
                 })
-                .catch((e) => {
+                .catch(() => {
                     this.resetMessage = "Reset Password error"
                 });
         },
         // Change or create default shipping data.
         async changeShippingData(addressData) {
-            const userId = this.authUser.id;
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/change-shipping-data');
 
             try {
-                const response = await axios.put(url, addressData, {
+                const response = await axios.put(url.toString(), addressData, {
                     headers: {
+                        // eslint-disable-next-line no-undef
                         Authorization: `Bearer ${useCookie("accessToken").value}`
                     }
                 });
-                this.setDataShipping = response.data;
                 this.changeDataMsg = response.data.message;
             } catch (error) {
                 this.changeDataMsg = error.response.data.message;
@@ -148,12 +153,15 @@ export const useUserStore = defineStore('UserStore', {
         },
         // Load user default shipping data.
         async loadDefaultShippingData() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/get-shipping-data');
 
+            // eslint-disable-next-line no-undef
             if (useCookie("accessToken").value) {
                 try {
-                    const response = await axios.get(url, {
+                    const response = await axios.get(url.toString(), {
                         headers: {
+                            // eslint-disable-next-line no-undef
                             Authorization: `Bearer ${useCookie("accessToken").value}`
                         }
                     });
@@ -167,11 +175,13 @@ export const useUserStore = defineStore('UserStore', {
         // load order's user from id
         async loadOrderUser() {
             this.loading = true; // Shows the loader while loading
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/orders`);
 
             try {
-                const response = await axios.get(url, {
+                const response = await axios.get(url.toString(), {
                     headers: {
+                        // eslint-disable-next-line no-undef
                         Authorization: `Bearer ${useCookie("accessToken").value}`
                     }
                 });
@@ -186,23 +196,23 @@ export const useUserStore = defineStore('UserStore', {
         },
         // Logout user
         logoutUser() {
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/logout');
             const userId = this.authUser.id;
-            axios.post(url, userId, {
+            axios.post(url.toString(), userId, {
                 headers: {
+                    // eslint-disable-next-line no-undef
                     Authorization: `Bearer ${useCookie("accessToken").value}`
                 }
             })
-                .then(response => {
-                    console.log(response.data);
+                .then(() => {
+                    // eslint-disable-next-line no-undef
                     useCookie("accessToken").value = null;
                     this.isLoggedIn = false;
                     this.authUser = [];
+                    // eslint-disable-next-line no-undef
                     useCartStore().cartItem.user_hash = useCookie("userHash").value;
                     this.$router.push("/shop")
-                })
-                .catch(error => {
-                    console.error(error);
                 });
         },
 

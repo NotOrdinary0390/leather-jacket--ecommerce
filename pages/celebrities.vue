@@ -1,9 +1,17 @@
 <template>
-  <h1 class="my-4 ml-4 text-sm">Celebrities</h1>
-  <hr />
+  <div>
+    <h1 class="my-4 ml-4 text-sm">
+      Celebrities
+    </h1>
+    <hr>
     <div class="flex flex-wrap justify-center">
-      <CardCelebrities v-for="(celebrity, index) in celebrities" :key="index" :celebrity="celebrity" />
+      <CardCelebrities
+        v-for="(celebrity, index) in celebrities"
+        :key="index"
+        :celebrity="celebrity"
+      />
     </div>
+  </div>
 </template>
 
 <script setup>

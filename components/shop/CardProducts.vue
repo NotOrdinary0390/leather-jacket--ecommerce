@@ -1,15 +1,15 @@
 <template>
   <div class="card-products gap-2">
     <NuxtLink :to="'/product/' + props.variation.product.slug">
-      
       <div
         v-if=" props.variation.images.length > 0 && props.variation.images.filter((image) => image.primary).length > 0
-        " >
+        "
+      >
         <nuxt-img
           v-show="imgClasses.includes('block')"
           :src="
             useRuntimeConfig().public.MEDIA_URL +
-            props.variation.images.filter((image) => image.primary)[0].image
+              props.variation.images.filter((image) => image.primary)[0].image
           "
           :alt="props.variation.images[0].image_meta"
           class="img-product"
@@ -17,7 +17,10 @@
           @load="handleImageFadeIn"
         />
       </div>
-      <div v-else class="h-[350px] flex items-center border border-gray-300">
+      <div
+        v-else
+        class="h-[350px] flex items-center border border-gray-300"
+      >
         <nuxt-img
           v-show="imgClasses.includes('block')"
           src="/images/logo-black.jpeg"
@@ -27,9 +30,9 @@
           @load="handleImageFadeIn"
         />
       </div>
-      <div
-        class="w-full flex justify-center items-center h-[350px]"
+      <div 
         v-show="imgClasses.includes('hidden')"
+        class="w-full flex justify-center items-center h-[350px]"
       >
         <LoaderComponent />
       </div>
@@ -50,7 +53,10 @@
   Define props
   -------------------------*/
 const props = defineProps({
-  variation: Object,
+  variation: {
+    type: Object,
+    required: true,
+  }
 });
 
 const imgClasses = ref(["hidden"]);

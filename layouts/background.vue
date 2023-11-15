@@ -6,8 +6,8 @@
         <slot />
       </main>
     </div>
+    <LayoutShared />
   </div>
-  <LayoutShared />
 </template>
 
 <script setup>

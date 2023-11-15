@@ -2,21 +2,24 @@
   <!-- products cart div & info -->
   <div class="flex justify-between items-center">
     <!-- single product cart div -->
-    <div class="flex my-5">
+    <div class="flex my-5"> 
       <img
         :src="
           useRuntimeConfig().public.MEDIA_URL +
-          props.item.stock?.images[0].image
+            props.item.stock?.images[0].image
         "
         :alt="props.item.stock?.images[0].image_meta"
         class="w-[100px] h-[100px] object-cover"
-      />
+      >
       <div class="ml-3">
         <p>{{ props.item.stock.product.name }}</p>
         <p class="text-sm text-gray-400">
           {{ props.item.stock.color_name }} / {{ props.item.size?.size }}
         </p>
-        <p class="text-xs mt-10 cursor-pointer" @click="handleRemoveItem">
+        <p
+          class="text-xs mt-10 cursor-pointer"
+          @click="handleRemoveItem"
+        >
           REMOVE
         </p>
         <LoaderComponent v-if="isLoading" />
@@ -25,14 +28,20 @@
     <!-- info quantity price total-->
     <div class="box-price-quantity">
       <div class="flex items-center">
-        <p class="text-[7pt] mr-1">QTY</p>
+        <p class="text-[7pt] mr-1">
+          QTY
+        </p>
         <div
           class="w-9 h-9 border border-black flex items-center justify-center"
         >
-          <p class="text-[10pt]">{{ props.item.quantity }}</p>
+          <p class="text-[10pt]">
+            {{ props.item.quantity }}
+          </p>
         </div>
       </div>
-      <p class="text-[10pt] max-[550px]:hidden">€ {{ props.item.price }}</p>
+      <p class="text-[10pt] max-[550px]:hidden">
+        € {{ props.item.price }}
+      </p>
       <p class="text-[10pt]">
         € {{ calcTotalPrice(props.item.price, props.item.quantity) }}
       </p>
@@ -45,7 +54,12 @@
 /*------------------------
   Define props
   -------------------------*/
-  const props = defineProps(["item"]);
+  const props = defineProps({
+    item: {
+      type: Object,
+      required: true,
+    },
+  });
 
 //Ref
 const isLoading = ref(false);
@@ -66,7 +80,6 @@ const handleRemoveItem = () => {
     .removeCartItem(stock_id, quantity, size_id, product_price)
     .then(() => {
       isLoading.value = false;
-      //window.location.reload(); 
     });
 };
 </script>

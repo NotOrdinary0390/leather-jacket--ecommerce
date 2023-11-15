@@ -1,66 +1,83 @@
 <template>
   <div class="mx-4 max-[340px]:mx-1">
-    <p class="text-sm tracking-wider mb-3 ml-4">Create Account</p>
+    <p class="text-sm tracking-wider mb-3 ml-4">
+      Create Account
+    </p>
 
     <form @submit.prevent="handleRegister">
       <div class="form-container font-primary">
-        <label class="text-xs tracking-wider mb-2" for="email">Email</label>
-        <input
-          type="email"
-          class="input-form"
+        <label 
+          class="text-xs tracking-wider mb-2" 
+          for="email"
+        >
+          Email
+        </label>
+        <input 
           id="email"
           v-model="registrationData.email"
-        />
+          type="email"
+          class="input-form"
+        >
         <strong class="text-red-500 text-xs">{{
           useUserStore().emailError
         }}</strong>
-        <label class="text-xs tracking-wider mt-6 mb-2" for="password"
-          >Password</label
-        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="password"
+        >Password</label>
         <input
+          v-model="registrationData.password"
           type="password"
           class="input-form"
-          v-model="registrationData.password"
-        />
+        >
         <strong class="text-red-500 text-xs">{{
           useUserStore().passwordError
         }}</strong>
-        <label class="text-xs tracking-wider mt-6 mb-2" for="password"
-          >Confirm Password</label
-        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="password"
+        >Confirm Password</label>
         <input
+          v-model="registrationData.password_confirmation"
           type="password"
           class="input-form"
-          v-model="registrationData.password_confirmation"
-        />
+        >
         <strong class="text-red-500 text-xs">{{
           useUserStore().confirmPasswordError
         }}</strong>
-        <label class="text-xs tracking-wider mt-6 mb-2" for="password"
-          >First Name</label
-        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="password"
+        >First Name</label>
         <input
-          type="text"
-          class="input-form"
           v-model="registrationData.first_name"
-        />
-        <label class="text-xs tracking-wider mt-6 mb-2" for="password"
-          >Last Name</label
-        >
-        <input
           type="text"
           class="input-form"
+        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="password"
+        >Last Name</label>
+        <input
           v-model="registrationData.last_name"
-        />
-        <label class="text-xs tracking-wider mt-6 mb-2" for="password"
-          >Phone</label
-        >
-        <input
           type="text"
           class="input-form"
+        >
+        <label
+          class="text-xs tracking-wider mt-6 mb-2"
+          for="password"
+        >Phone</label>
+        <input
           v-model="registrationData.phone"
-        />
-        <button type="submit" class="btn-form">SUBMIT</button>
+          type="text"
+          class="input-form"
+        >
+        <button
+          type="submit"
+          class="btn-form"
+        >
+          SUBMIT
+        </button>
       </div>
     </form>
   </div>
@@ -110,8 +127,7 @@ function handleRegister() {
         registrationData.phone = "";
       }
     })
-    .catch((error) => {
-      //console.error(error);
+    .catch(() => {
       notie.alert({
         type: "error",
         text: useUserStore().registerMessage,

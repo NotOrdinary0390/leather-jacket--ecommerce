@@ -1,8 +1,13 @@
 <template>
   <div class="mb-3">
-    <p class="font-extrabold text-[7pt]">SELECT COLOR</p>
+    <p class="font-extrabold text-[7pt]">
+      SELECT COLOR
+    </p>
     <div>
-      <div v-if="stocks.length > 0" class="flex mt-2">
+      <div
+        v-if="stocks.length > 0"
+        class="flex mt-2"
+      >
         <div
           v-for="variation in stocks"
           :key="variation.id"
@@ -10,9 +15,12 @@
           :class="{ 'selected-variant': isSelected(variation) }"
           :style="`background-color: ${variation.color_code}`"
           @click="selectColor(variation)"
-        ></div>
+        />
       </div>
-      <div v-else class="no-color-variant"></div>
+      <div
+        v-else
+        class="no-color-variant"
+      />
     </div>
   </div>
 </template>
@@ -21,7 +29,12 @@
 import { useProductStore } from "~/stores/ProductStore";
 import { useCartStore } from "~/stores/CartStore";
 
-const props = defineProps(["product"]);
+const props = defineProps({
+  product: {
+    type: Object,
+    required: true,
+  },
+});
 const stocks = props.product.stocks;
 
 // Select first variant

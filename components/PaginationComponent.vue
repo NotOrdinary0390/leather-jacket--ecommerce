@@ -41,7 +41,21 @@
 
 <script setup>
 
-const props = defineProps(["totalItems", "currentPage", "lastPage"]);
+const props = defineProps({
+  currentPage: {
+    type: Number,
+    required: true,
+  },
+  lastPage: {
+    type: Number,
+    required: true,
+  },
+  totalItems: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
+});
 
 const goToPage = (pageNumber) => {
   emits("change-page", pageNumber);

@@ -1,30 +1,48 @@
 <template>
-
-  <div class="custom-select border-gray" >
-    <div class="select-header" :class="sizeError ? 'error' : '' " @click="toggleOptions">
+  <div class="custom-select border-gray">
+    <div
+      class="select-header"
+      :class="sizeError ? 'error' : '' "
+      @click="toggleOptions"
+    >
       <span class="text-xs w-2/3 py-2 px-2">{{
         selectedSize || "Select size"
-      }}</span>
+      }}</span> 
       <div class="w-[41px] py-2 border-l border-gray-400 flex justify-center">
-        <span v-if="!isOpen" class="material-symbols-outlined">
+        <span
+          v-if="!isOpen"
+          class="material-symbols-outlined"
+        >
           expand_more
         </span>
-        <span v-else class="material-symbols-outlined"> expand_less </span>
+        <span
+          v-else
+          class="material-symbols-outlined"
+        > expand_less </span>
       </div>
     </div>
-    <ul class="options border-gray" v-show="isOpen" ref="selectSizes">
+    <ul
+      v-show="isOpen"
+      ref="selectSizes"
+      class="options border-gray"
+    >
       <li
         v-for="size in productStore.currentVariation.sizes"
         :key="size"
         @click="selectSize(size.id, size.size)"
       >
-      
-        <p v-if="size.pivot.quantity === 0" class="">{{ size.size }} - Not available</p>
-        <p v-else>{{ size.size }} </p>        
+        <p
+          v-if="size.pivot.quantity === 0"
+          class=""
+        >
+          {{ size.size }} - Not available
+        </p>
+        <p v-else>
+          {{ size.size }}
+        </p>        
       </li>
     </ul>
   </div>
-  
 </template>
 
 <script setup>
@@ -48,13 +66,13 @@ function toggleOptions(event) {
 }
 
 function selectSize(id, size) {
-  productStore.selectSizeVariant(id, size);
+  productStore.selectSizeVariant(id);
   selectedSize.value = size;
   isOpen.value = false;
   //console.log(size)
 }
 
-onClickOutside(selectSizes, (e) => {
+onClickOutside(selectSizes, () => {
   isOpen.value = false;
 });
 
@@ -99,6 +117,7 @@ onClickOutside(selectSizes, (e) => {
 .border-red {
   border:1px solid red;
 }
+
 .error {
   background-color: #f4080821;
   border: 1px solid red;

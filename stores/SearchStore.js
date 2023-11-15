@@ -5,7 +5,7 @@ export const useSearchStore = defineStore('SearchStore', {
     state: () => {
         return {
             products: {},
-            loading: false, // Aggiunto stato loading
+            loading: false,
             searchTerm: "",
         }
     },
@@ -17,6 +17,7 @@ export const useSearchStore = defineStore('SearchStore', {
             this.searchTerm = searchTerm;
             this.loading = true;
             try {
+                // eslint-disable-next-line no-undef
                 const response = await axios.get(useRuntimeConfig().public.APP_URL + '/proxy/products', {
                     params: {
                         search: searchTerm,

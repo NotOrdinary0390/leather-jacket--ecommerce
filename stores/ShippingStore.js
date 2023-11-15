@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-// Define the store named 'useShippinStore'
+// Define the store named 'useShippingStore'
 export const useShippingStore = defineStore('ShippingStore', {
     // Define the state of the store
     state: () => {
@@ -51,7 +51,9 @@ export const useShippingStore = defineStore('ShippingStore', {
         async sendShippingData(shippingData) {
             console.log(shippingData)
 
+            // eslint-disable-next-line no-undef
             shippingData.user_id = useUserStore().isLoggedIn ? useUserStore().authUser.id : null;
+            // eslint-disable-next-line no-undef
             shippingData.user_hash = !useUserStore().isLoggedIn ? useCookie("userHash").value : null;
             shippingData.shipping_first_name = shippingData.shipping_first_name || null;
             shippingData.shipping_last_name = shippingData.shipping_last_name || null;
@@ -62,11 +64,13 @@ export const useShippingStore = defineStore('ShippingStore', {
             shippingData.shipping_zip_code = shippingData.shipping_zip_code || null;
             shippingData.shipping_contact_phone = shippingData.shipping_contact_phone || null;
 
+            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/orders/set-shipping');
 
             try {
-                const response = await axios.post(url, shippingData, {
+                const response = await axios.post(url.toString(), shippingData, {
                     headers: {
+                        // eslint-disable-next-line no-undef
                         Authorization: `Bearer ${useCookie("accessToken").value}`
                     }
                 });

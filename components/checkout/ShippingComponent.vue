@@ -2,48 +2,63 @@
   <form @submit.prevent="handleSubmit">
     <div class="min-[900px]:flex min-[900px]:space-x-10 mt-10">
       <div class="text-sm w-full">
-        <p class="font-wheightbold">BILLING ADDRESS</p>
-        <div class="border border-black mt-2 mb-10"></div>
+        <p class="font-wheightbold">
+          BILLING ADDRESS
+        </p> 
+        <div class="border border-black mt-2 mb-10" />
         <div class="form-address">
-          <label for="firstName" class="label-address">First Name</label>
+          <label
+            for="firstName"
+            class="label-address"
+          >First Name</label>
           <input
+            id="firstName"
             v-model="shippingData.legal_first_name"
             type="text"
-            id="firstName"
             class="input-address"
             :placeholder="useShippingStore().setFirstName"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="lastName" class="label-address">Last Name</label>
+          <label
+            for="lastName"
+            class="label-address"
+          >Last Name</label>
           <input
+            id="lastName"
             v-model="shippingData.legal_last_name"
             type="text"
-            id="lastName"
             class="input-address"
             :placeholder="useShippingStore().setLastName"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="email" class="label-address">Email</label>
+          <label
+            for="email"
+            class="label-address"
+          >Email</label>
           <input
+            id="email"
             v-model="shippingData.contact_email"
             type="email"
-            id="email"
             class="input-address"
             :placeholder="useShippingStore().setEmail"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="country" class="label-address">Country</label>
+          <label
+            for="country"
+            class="label-address"
+          >Country</label>
           <select
-            v-model="shippingData.legal_country_code"
             id="country"
+            v-model="shippingData.legal_country_code"
             class="select-address"
           >
-            <option :value="useShippingStore().setCountry"></option>
+            <option :value="useShippingStore().setCountry" />
             <option
               v-for="country in useShippingStore().countries"
+              :key="country.iso2"
               :value="country.iso2"
             >
               {{ country.name }}
@@ -54,80 +69,102 @@
           {{ useShippingStore().setCountry }}
         </p>
         <div class="form-address">
-          <label for="address" class="label-address">Address Line</label>
+          <label
+            for="address"
+            class="label-address"
+          >Address Line</label>
           <input
+            id="address"
             v-model="shippingData.legal_address"
             type="text"
-            id="address"
             class="input-address"
             :placeholder="useShippingStore().setAddress"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="streetNumber" class="label-address">Street Num</label>
+          <label
+            for="streetNumber"
+            class="label-address"
+          >Street Num</label>
           <input
+            id="streetNumber"
             v-model="shippingData.legal_street_number"
             type="text"
-            id="streetNumber"
             class="input-address"
             :placeholder="useShippingStore().setStreetN"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="city" class="label-address">City / Suburb</label>
+          <label
+            for="city"
+            class="label-address"
+          >City / Suburb</label>
           <input
+            id="city"
             v-model="shippingData.legal_city"
             type="text"
-            id="city"
             class="input-address"
             :placeholder="useShippingStore().setCity"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="zip" class="label-address">Zip / Postcode</label>
+          <label
+            for="zip"
+            class="label-address"
+          >Zip / Postcode</label>
           <input
+            id="zip"
             v-model="shippingData.legal_zip_code"
             type="text"
-            id="zip"
             class="input-address"
             pattern="\d{5}"
             :placeholder="useShippingStore().setZipCode"
-          />
+          >
         </div>
         <div class="form-address">
-          <label for="mobile" class="label-address">Mobile Phone</label>
+          <label
+            for="mobile"
+            class="label-address"
+          >Mobile Phone</label>
           <input
+            id="mobile"
             v-model="shippingData.legal_contact_phone"
             type="tel"
-            id="mobile"
             class="input-address"
             :placeholder="useShippingStore().setPhone"
-          />
+          >
         </div>
       </div>
       <!-- Different address data -->
       <div class="max-[901px]:mt-12 font-primary text-sm w-full">
-        <p class="font-wheightbold">DELIVERY ADDRESS</p>
-        <div class="border border-black mt-2 mb-10"></div>
+        <p class="font-wheightbold">
+          DELIVERY ADDRESS
+        </p>
+        <div class="border border-black mt-2 mb-10" />
 
         <!-- Radio button for show optional address form -->
         <div class="flex items-center mb-2">
           <input
-            type="radio"
             v-model="useAlternativeAddress"
+            type="radio"
             class="mr-2"
             value="false"
-          />
-          <p class="text-xs">Default (same as billing address)</p>
+          >
+          <p class="text-xs">
+            Default (same as billing address)
+          </p>
         </div>
         <div class="flex items-center">
           <input
-            type="radio"
             v-model="useAlternativeAddress"
+            type="radio"
             class="mr-2"
             value="true"
-          />
-          <p class="text-xs" @click="showOptionalAddressForm">
+          >
+          <p
+            class="text-xs"
+            @click="showOptionalAddressForm"
+          >
             Add an alternative delivery address
           </p>
         </div>
@@ -137,34 +174,44 @@
           class="font-primary text-sm w-full"
         >
           <div class="form-address">
-            <label for="firstName2" class="label-address">First Name</label>
+            <label
+              for="firstName2"
+              class="label-address"
+            >First Name</label>
             <input
+              id="firstName2"
               v-model="shippingData.shipping_first_name"
               type="text"
-              id="firstName2"
               class="input-address"
               :placeholder="useShippingStore().setFirstName"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="lastName2" class="label-address">Last Name</label>
+            <label
+              for="lastName2"
+              class="label-address"
+            >Last Name</label>
             <input
+              id="lastName2"
               v-model="shippingData.shipping_last_name"
               type="text"
-              id="lastName2"
               class="input-address"
               :placeholder="useShippingStore().setLastName"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="country" class="label-address">Country</label>
+            <label
+              for="country"
+              class="label-address"
+            >Country</label>
             <select
-              v-model="shippingData.shipping_country_code"
               id="country"
+              v-model="shippingData.shipping_country_code"
               class="select-address"
             >
               <option
                 v-for="country in useShippingStore().countries"
+                :key="country.iso2"
                 :value="country.iso2"
               >
                 {{ country.name }}
@@ -175,60 +222,77 @@
             {{ useShippingStore().setCountry }}
           </p>
           <div class="form-address">
-            <label for="address" class="label-address">Address Line</label>
+            <label
+              for="address"
+              class="label-address"
+            >Address Line</label>
             <input
+              id="address"
               v-model="shippingData.shipping_address"
               type="text"
-              id="address"
               class="input-address"
               :placeholder="useShippingStore().setAddress"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="streetNumber2" class="label-address">Street Num</label>
+            <label
+              for="streetNumber2"
+              class="label-address"
+            >Street Num</label>
             <input
+              id="streetNumber2"
               v-model="shippingData.shipping_street_number"
               type="text"
-              id="streetNumber2"
               class="input-address"
               :placeholder="useShippingStore().setStreetN"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="city" class="label-address">City / Suburb</label>
+            <label
+              for="city"
+              class="label-address"
+            >City / Suburb</label>
             <input
+              id="city"
               v-model="shippingData.shipping_city"
               type="text"
-              id="city"
               class="input-address"
               :placeholder="useShippingStore().setCity"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="zip" class="label-address">Zip / Postcode</label>
+            <label
+              for="zip"
+              class="label-address"
+            >Zip / Postcode</label>
             <input
+              id="zip"
               v-model="shippingData.shipping_zip_code"
               type="text"
-              id="zip"
               class="input-address"
               pattern="\d{5}"
               :placeholder="useShippingStore().setZipCode"
-            />
+            >
           </div>
           <div class="form-address">
-            <label for="mobile" class="label-address">Mobile Phone</label>
+            <label
+              for="mobile"
+              class="label-address"
+            >Mobile Phone</label>
             <input
+              id="mobile"
               v-model="shippingData.shipping_contact_phone"
               type="tel"
-              id="mobile"
               class="input-address"
               :placeholder="useShippingStore().setPhone"
-            />
+            >
           </div>
         </div>
       </div>
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit">
+      Submit
+    </button>
   </form>
 </template>
 
@@ -281,8 +345,7 @@ const handleSubmit = () => {
         });
       }
     })
-    .catch((error) => {
-      //console.error(error);
+    .catch(() => {
       notie.alert({
         type: "error",
         text: useShippingStore().setDataMsg,

@@ -1,14 +1,17 @@
 <template>
-  <NavbarComponent />
-  <div class="my-24">
-    <main class="main-body">
-      <slot />
-    </main>
+  <div>
+    <NavbarComponent />
+    <div class="my-24">
+      <main class="main-body">
+        <slot />
+      </main>
+      <LayoutShared />
+    </div>
   </div>
-  <LayoutShared />
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style scoped>
 

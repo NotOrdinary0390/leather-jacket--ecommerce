@@ -1,11 +1,16 @@
 <template>
-  <nuxtLink to="shop" class="text-gray-400 underline">
-    <div class="hidden-link"></div>
-  </nuxtLink>
-  <div class="home-container">
-    <h1 class="text-home">
-      <span class="text-xl tracking-wider">High-Quality Garments</span><br> All items are handcrafted in genuine Italian leather with premium accessories and finishes that make each jacket exclusive and one-of-a-kind.
-    </h1>
+  <div>
+    <nuxtLink
+      to="shop"
+      class="text-gray-400 underline"
+    >
+      <div class="hidden-link" />
+    </nuxtLink>
+    <div class="home-container">
+      <h1 class="text-home">
+        <span class="text-xl tracking-wider">High-Quality Garments</span><br> All items are handcrafted in genuine Italian leather with premium accessories and finishes that make each jacket exclusive and one-of-a-kind.
+      </h1>
+    </div>
   </div>
 </template>
 
@@ -30,7 +35,7 @@ definePageMeta({
 });
 </script>
 
-<style scoped>
+<style scoped> 
 
 .home-container {
   backdrop-filter: blur(px);

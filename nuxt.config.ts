@@ -75,6 +75,7 @@ export default defineNuxtConfig({
   },
   sitemap: {
     cacheMaxAgeSeconds: 360, // 1 hour
+    // @ts-ignore
     urls: async () => {
       const products = await axios.get(process.env.API_URL + '/products?no-paginate');
       const posts = await axios.get(process.env.API_URL + '/posts?no-paginate');
@@ -106,6 +107,7 @@ export default defineNuxtConfig({
   modules: [
       '@nuxt/image',
       '@pinia/nuxt',
-      'nuxt-simple-sitemap'
+      'nuxt-simple-sitemap',
+      '@nuxtjs/eslint-module'
   ]
 });

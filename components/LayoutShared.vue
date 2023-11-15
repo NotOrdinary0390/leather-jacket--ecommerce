@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div />
+</template>
 
 <script setup>
 
@@ -18,7 +20,7 @@ const handleUserHash = () => {
   // Create user Hash temporary
   const hash = md5(new Date() + Math.random() * 1000000000);
   Date.prototype.addDays = function (days) {
-    let date = new Date(this.valueOf());
+    const date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
     return date;
   };
@@ -43,10 +45,10 @@ const handleUserHash = () => {
   }
 };
 
-onMounted( async () => {
+onMounted( async () => { 
 
   // Cookie Bot
-  let cookieScript = document.createElement('script');
+  const cookieScript = document.createElement('script');
   cookieScript.setAttribute('src', 'https://consent.cookiebot.com/uc.js?cbid=fc7baf94-ca54-4f47-8262-cfed979af6a5');
   cookieScript.setAttribute('defer', 'true');
   cookieScript.setAttribute('async', 'true');
