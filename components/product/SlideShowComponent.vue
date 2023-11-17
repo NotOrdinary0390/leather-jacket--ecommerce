@@ -3,6 +3,7 @@
     <div class="glide relative w-full">
       <!-- Slider buttons start -->
       <div
+        v-if="useProductStore().currentVariation.images.length > 1"
         class="glide__arrows flex justify-between"
         data-glide-el="controls"
       >
@@ -58,18 +59,22 @@ let mountSlider = new Glide('.glide', {
 });
 
 onMounted(() => {
-  mountSlider.mount();
+  if (useProductStore().currentVariation.images.length > 1) {
+    mountSlider.mount();
+  }
 });
 
 watch(() => useProductStore().currentVariation, () => {
-  mountSlider.destroy();
-  setTimeout(() => {
-    mountSlider = new Glide('.glide', {
-      type: 'carousel',
-      startAt: 0,
-      autoplay: 5000
-    }).mount();
-  }, 200);
+  if (useProductStore().currentVariation.images.length > 1) {
+    mountSlider.destroy();
+    setTimeout(() => {
+      mountSlider = new Glide('.glide', {
+        type: 'carousel',
+        startAt: 0,
+        autoplay: 5000
+      }).mount();
+    }, 200);
+  }
 });
 
 </script>

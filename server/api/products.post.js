@@ -25,6 +25,8 @@ export default defineEventHandler(async (event) => {
 
     const cacheKey = 'products:' + md5(JSON.stringify(params));
 
+    redis.del(cacheKey);
+
     // eslint-disable-next-line no-undef
     if (useRuntimeConfig().public.ENABLE_CACHE === false) {
 
