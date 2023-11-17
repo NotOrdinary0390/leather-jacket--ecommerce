@@ -63,12 +63,19 @@ export default defineNuxtConfig({
           href: "https://unpkg.com/notie/dist/notie.min.css",
           media: "screen",
         },
+        {
+          rel: "stylesheet",
+          href: "https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/css/glide.core.min.css",
+          media: "screen",
+        }
       ],
       script: [
         {
           src: "https://unpkg.com/notie",
-          defer: true,
-          async: true,
+          defer: true
+        },
+        {
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js'
         }
       ],
     },

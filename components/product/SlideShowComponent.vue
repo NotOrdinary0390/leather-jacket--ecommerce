@@ -48,32 +48,34 @@
 
 <script setup>
 import { useProductStore } from "@/stores/ProductStore";
-import Glide from '@glidejs/glide';
-import '@glidejs/glide/dist/css/glide.core.min.css';
 
 // Automatically start sliding images on component mount
-let mountSlider = new Glide('.glide', {
-  type: 'carousel',
-  startAt: 0,
-  autoplay: 5000
-});
+let mountSlider = null;
 
 onMounted(() => {
-  if (useProductStore().currentVariation.images.length > 1) {
-    mountSlider.mount();
-  }
-});
-
-watch(() => useProductStore().currentVariation, () => {
-  if (useProductStore().currentVariation.images.length > 1) {
-    mountSlider.destroy();
-    setTimeout(() => {
-      mountSlider = new Glide('.glide', {
+  if (process.client) {
+    if (useProductStore().currentVariation.images.length > 1) {
+      mountSlider = new window.Glide('.glide', {
         type: 'carousel',
         startAt: 0,
         autoplay: 5000
       }).mount();
-    }, 200);
+    }
+  }
+});
+
+watch(() => useProductStore().currentVariation, () => {
+  if (process.client) {
+    if (useProductStore().currentVariation.images.length > 1) {
+      mountSlider.destroy();
+      setTimeout(() => {
+        mountSlider = new window.Glide('.glide', {
+          type: 'carousel',
+          startAt: 0,
+          autoplay: 5000
+        }).mount();
+      }, 200);
+    }
   }
 });
 
