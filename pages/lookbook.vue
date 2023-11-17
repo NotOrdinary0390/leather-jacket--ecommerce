@@ -1,40 +1,29 @@
 <template>
   <div>
-    <!-- <div class="my-4 ml-4 text-sm">Lookbook</div>
-<hr /> -->
     <div class="text-center my-20">
-      <p class="text-[8pt]">
-        AUGUST 24, 2023
-      </p>
-      <h1 class="text-lg my-1">
-        Fall / Winter 2023 Lookbook
-      </h1>
+      <p class="text-[8pt]">AUGUST 24, 2023</p>
+      <h1 class="text-lg my-1">Fall / Winter 2023 Lookbook</h1>
     </div>
-    <div
-      v-if="collectionsStore.loading"
-      class="loader-container"
-    >
+    <div v-if="collectionsStore.loading" class="loader-container">
       <LoaderComponent />
     </div>
-    <div v-else>
+    <div
+      v-else
+      class="flex flex-wrap justify-center"
+    >
       <div
-        v-for="product in collectionsStore.latestCollection.products"
-        :key="product.id"
-        class="section-collection"
+        v-for="stock in collectionsStore.getVariations(
+          collectionsStore.latestCollection
+        )"
+        :key="stock.id"
+        class="product-collection"
       >
-        <div
-          v-for="stock in product.stocks"
-          :key="stock.id"
-          class="product-collection"
-        >
-          <!-- {{ stock }} -->
-          <nuxt-img
-            v-if="stock.images && stock.images.length > 0"
-            :src="useRuntimeConfig().public.MEDIA_URL + stock.images[0].image"
-            class="img-product"
-          />
-        <!-- <p>{{ product.name }}</p> -->
-        </div>
+        <!-- {{ stock.id }} -->
+        <nuxt-img
+          v-if="stock.images && stock.images.length > 0"
+          :src="useRuntimeConfig().public.MEDIA_URL + stock.images[0].image"
+          class="img-product"
+        />
       </div>
     </div>
   </div>
@@ -42,12 +31,14 @@
 
 <script setup>
 import { useCollectionStore } from "@/stores/CollectionStore";
+import { onMounted } from "vue";
 
 const collectionsStore = useCollectionStore();
 
 onMounted(() => {
   useCollectionStore().loadLatestCollection();
 });
+
 useHead({
   title: "Lookbook - Alessandra Grimoldi",
   meta: [
@@ -60,15 +51,14 @@ useHead({
 </script>
 
 <style scoped>
-.section-collection {
-  /* border: 1px solid green; */
-  display: flex;
-}
 .product-collection {
-  width: 35%;
-  overflow: hidden;
-  margin: 8px;
+  flex: 0 0 33.3%;
+  box-sizing: border-box;
+  padding: 3.2px;
+  margin: 0;
+  /* border: 1px solid red; */
 }
+
 .img-product {
   width: 100%;
   object-fit: cover;
