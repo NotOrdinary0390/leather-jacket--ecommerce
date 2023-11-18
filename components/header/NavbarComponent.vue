@@ -15,7 +15,7 @@
       <div class="overflow-y-auto h-screen mt-10 pb-[130px] sm:pb-[150px] hide-scroll">
         <div class="text-end">
           <span
-            class="material-symbols-outlined text-2xl cursor-pointer fixed right-2 top-3"
+            class="material-symbols-outlined text-2xl cursor-pointer absolute right-2 top-3"
             @click="toggleMenu"
           >
             close
