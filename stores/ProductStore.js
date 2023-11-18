@@ -9,6 +9,7 @@ export const useProductStore = defineStore('ProductStore', {
         product: {},
         productVariations: [],
         currentVariation: {},
+        searchTerm: "",
         loading: true,
         pagination: {
             currentPage: 1,
@@ -40,6 +41,28 @@ export const useProductStore = defineStore('ProductStore', {
                     this.loading = false;
                 });
 
+        },
+        async loadSearchProducts(searchTerm) {
+            this.searchTerms = searchTerm;
+            console.log(searchTerm)
+            this.loading = true;
+            try {
+                const response = await axios.get(useRuntimeConfig().public.APP_URL + '/proxy/products', {
+                    params: {
+                        search: searchTerm,
+                        stocks: "",
+                        stock_images: "",
+                        stock_sizes: "",
+                    }
+                });
+                this.products = response.data.data.data;
+                console.log('Prod :', this.products)
+                
+            } catch (error) {
+                console.error(error);
+            } finally {
+                this.loading = false;
+            }
         },
 
         // Load single Product from slug
