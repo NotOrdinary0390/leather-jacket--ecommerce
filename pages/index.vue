@@ -54,7 +54,7 @@ definePageMeta({
 
 .hidden-link {
   /* border: 1px solid white; */
-  display: none;
+  display: block;
   width: 100%;
   height: 500px;
   position: absolute;

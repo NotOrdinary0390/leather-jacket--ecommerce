@@ -24,7 +24,7 @@
           </h1>
           <div class="flex flex-wrap max-[500px]:flex-wrap">
             <CardProducts
-              v-for="variation in collectionsStore.getVariations(collection)"
+              v-for="variation in collectionsStore.getVariations(collection).slice(0, 8)"
               :key="variation.id"
               :variation="variation"
             />
