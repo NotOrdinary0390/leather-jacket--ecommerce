@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="my-4 ml-4 text-sm">
-      Products : {{ useSearchStore().searchTerm }}
+      Products : {{ useProductStore().searchTerm }}
     </div>
     <hr>
     <div class="container-app">
       <div
-        v-if="searchStore.loading"
+        v-if="useProductStore().loading"
         class="loader-container"
       >
         <LoaderComponent />
@@ -29,20 +29,12 @@
 </template>
 
 <script setup>
-import { useSearchStore } from "@/stores/SearchStore";
-import { onMounted, ref } from "vue";
+import { useProductStore } from "@/stores/ProductStore";
 
-const searchStore = useSearchStore();
 const products = ref([]);
 
-onMounted(async () => {
-  try {
-    await searchStore.searchNavProducts("");
-    products.value = searchStore.products;
-    console.log(products.value)
-  } catch (error) {
-    console.error(error);
-  }
+watchEffect(async () => {
+    products.value = useProductStore().products;
 });
 
 useHead({

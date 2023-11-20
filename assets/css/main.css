@@ -36,7 +36,7 @@
   left: 0;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 550px) {
   .menu {
     width: 49%;
   }

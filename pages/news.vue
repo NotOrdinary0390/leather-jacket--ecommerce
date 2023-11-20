@@ -63,7 +63,10 @@ const loadNews = () => {
   axios
     .get(useRuntimeConfig().public.APP_URL + "/proxy/posts")
     .then((response) => {
-      posts.value = response.data.data.data;
+      posts.value = response.data.data.data.sort((a, b) => {
+        // Sort by created_at in descending order
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
       console.log(response.data.data);
     })
     .catch((error) => {
@@ -73,6 +76,7 @@ const loadNews = () => {
       loading.value = false; // Hides the loader after loading
     });
 };
+
 
 onMounted(() => {
   loadNews();
