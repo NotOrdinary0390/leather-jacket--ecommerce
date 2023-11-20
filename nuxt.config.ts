@@ -114,7 +114,6 @@ export default defineNuxtConfig({
   modules: [
       '@nuxt/image',
       '@pinia/nuxt',
-      'nuxt-simple-sitemap',
-      '@nuxtjs/eslint-module'
+      'nuxt-simple-sitemap'
   ]
 });

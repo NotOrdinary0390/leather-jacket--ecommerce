@@ -8,7 +8,6 @@ function piniaNuxtPlugin({store}) {
     store.$route = route;
 }
 
-// eslint-disable-next-line no-undef
 export default defineNuxtPlugin(({$pinia}) => {
     $pinia.use(piniaNuxtPlugin);
 }) 
