@@ -38,11 +38,15 @@ watchEffect(async () => {
 });
 
 useHead({
-  title: "Leather Jacket - Alessandra Grimoldi",
+  title: "Leather Jackets - Alessandra Grimoldi",
   meta: [
     {
-      name: "Leather Jacket - Alessandra Grimoldi",
-      content: "Leather Jacket Luxury - Alessandra Grimoldi",
+      name: "description",
+      content: "Discover the latest luxury leather jackets by Alessandra Grimoldi. Elevate your style with our exclusive collection of high-quality leather jackets.",
+    },
+    {
+      name: "keywords",
+      content: "leather jackets, luxury fashion, Alessandra Grimoldi, made in Italy",
     },
   ],
 });
