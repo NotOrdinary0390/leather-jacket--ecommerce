@@ -13,9 +13,9 @@
       :class="{ visible: isMenuVisible }"
     >
       <div class="overflow-y-auto h-screen pb-[130px] sm:pb-[150px] hide-scroll">
-        <div class="text-end ">
+        <div class="text-end relative">
           <span
-            class="material-symbols-outlined text-2xl cursor-pointer"
+            class="material-symbols-outlined text-2xl cursor-pointer absolute top-0 right-0"
             @click="toggleMenu"
           >
             close
