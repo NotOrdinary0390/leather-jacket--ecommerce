@@ -31,10 +31,15 @@
 <script setup>
 import { useProductStore } from "@/stores/ProductStore";
 
+const route = useRoute();
+
 const products = ref([]);
 
-watchEffect(async () => {
-    products.value = useProductStore().products;
+onMounted(() => {
+  useProductStore().loadSearchProducts(route.query.search)
+      .then(() => {
+        products.value = useProductStore().products;
+      });
 });
 
 useHead({

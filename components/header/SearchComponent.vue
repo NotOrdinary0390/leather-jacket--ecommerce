@@ -1,5 +1,5 @@
 <template>
-  <form class="search-form" @submit.prevent="searchProducts">
+  <form class="search-form">
     <div class="input-container">
       <input
         v-model="searchTerm"
@@ -7,28 +7,17 @@
         placeholder="SEARCH FOR"
         class="input-search-nav"
       />
-      <label for="searchIcon" class="search-icon">
-        <span id="searchIcon" class="material-symbols-outlined">search</span>
-      </label>
+      <nuxt-link :to="'/search-products?search=' + searchTerm">
+        <label for="searchIcon" class="search-icon">
+          <span id="searchIcon" class="material-symbols-outlined">search</span>
+        </label>
+      </nuxt-link>
     </div>
-    <button type="submit" class="hidden">Search</button>
   </form>
 </template>
 
 <script setup>
-import { useProductStore } from "@/stores/ProductStore";
-import { useRouter } from "vue-router";
-
 const searchTerm = ref("");
-const router = useRouter();
-
-function searchProducts() {
-  useProductStore()
-    .loadSearchProducts(searchTerm.value)
-    .then(() => {
-      router.push('/search-products');
-    });
-}
 </script>
 
 <style scoped>
