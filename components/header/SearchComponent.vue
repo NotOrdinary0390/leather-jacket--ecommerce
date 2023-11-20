@@ -1,5 +1,5 @@
 <template>
-  <form class="search-form">
+  <form class="search-form" @submit.prevent="closeMenu">
     <div class="input-container">
       <input
         v-model="searchTerm"
@@ -7,17 +7,26 @@
         placeholder="SEARCH FOR"
         class="input-search-nav"
       />
-      <nuxt-link :to="'/search-products?search=' + searchTerm">
+      <nuxt-link :to="'/search-products?search=' + searchTerm" @click="closeMenu">
         <label for="searchIcon" class="search-icon">
           <span id="searchIcon" class="material-symbols-outlined">search</span>
         </label>
       </nuxt-link>
+      <button type="submit" class="hidden"></button>
     </div>
   </form>
 </template>
 
 <script setup>
+const router = useRouter();
 const searchTerm = ref("");
+
+const closeMenu = () => {
+  emit("closeMenu");
+  router.push('/search-products?search=' + searchTerm.value);
+}
+
+const emit = defineEmits(["closeMenu"]);
 </script>
 
 <style scoped>

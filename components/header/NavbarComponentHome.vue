@@ -92,7 +92,7 @@
               />
             </li>
             <li class="my-12">
-              <SearchComponent />
+              <SearchComponent @closeMenu="toggleMenu" />
             </li>
             <!--  -------------------------------------------------------   -->
             <li class="mt-14 text-xs">

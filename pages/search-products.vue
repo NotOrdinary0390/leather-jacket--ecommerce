@@ -42,6 +42,13 @@ onMounted(() => {
       });
 });
 
+watch(() => route.query.search, () => {
+  useProductStore().loadSearchProducts(route.query.search)
+      .then(() => {
+        products.value = useProductStore().products;
+      });
+});
+
 useHead({
   title: "Leather Jackets - Alessandra Grimoldi",
   meta: [
