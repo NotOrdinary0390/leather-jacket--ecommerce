@@ -3,8 +3,9 @@ import { useProductStore } from './ProductStore';
 import { useUserStore } from './UserStore';
 import axios from 'axios';
 
+// Define the 'CartStore' store
 export const useCartStore = defineStore('CartStore', {
-    // Define state
+    // Define the initial state of the store
     state: () => ({
         cartTotal: 0,
         cartItems: [],
@@ -21,124 +22,108 @@ export const useCartStore = defineStore('CartStore', {
         sizeError: false,
     }),
 
-    // Define getters
+    // Define getters (currently empty)
     getters: {
-       
+        // Getter methods can be added here
     },
 
+    // Define actions (methods that can be called to perform asynchronous operations)
     actions: {
-
-        //Add To Cart
+        // Add To Cart
         async AddToCart() {
-            //console.log(this.cartItem.stock_id);
-            //console.log(cartItem)
+            // Check user login status and set appropriate values in 'cartItem'
             if (useUserStore().isLoggedIn === true) {
-                
                 this.cartItem.user_id = useUserStore().authUser.id;
-                //console.log(useUserStore().authUser)
-                this.cartItem.user_hash = null; 
-
-              } else {
-
-                this.cartItem.user_id = null; //
-                // eslint-disable-next-line no-undef
+                this.cartItem.user_hash = null;
+            } else {
+                this.cartItem.user_id = null;
                 this.cartItem.user_hash = useCookie("userHash").value;
-              }
-            // eslint-disable-next-line no-undef
-            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/add');
-            return axios
+            }
 
+            // Construct the URL for the API endpoint
+            const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/add');
+
+            // Make a POST request to add an item to the cart
+            return axios
                 .post(url.toString(), this.cartItem)
                 .then(() => {
-
+                    // Refresh cart items and reset sizeError
                     this.loadCartItems();
                     this.sizeError = false;
-
                 })
                 .catch(error => {
-                    // const fullError = error.response.data;
-
-                    if(error.response.data.errors.size_id) {
-                        //this.sizeError = error.response.data.errors.size_id[0];
+                    // Handle errors and set sizeError if there is an issue with size_id
+                    if (error.response.data.errors.size_id) {
                         this.sizeError = true;
                         console.log(this.sizeError);
-                    } 
-
-                }).finally(() => {
-
+                    }
+                })
+                .finally(() => {
                     this.loading = false; // Hides the loader after loading
-
                 });
         },
 
-        // Load items Cart 
+        // Load items in the cart
         async loadCartItems() {
-            // eslint-disable-next-line no-undef
+            // Construct the URL for the API endpoint
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart');
-            const params = {
-                //
-            };
-            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+            
+            // Prepare data for the POST request
             const data = {
-                // eslint-disable-next-line no-undef
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,
-            }
-            //console.log(useUserStore().isLoggedIn);
+            };
+
+            // Make a POST request to load cart items
             return axios
-                .post(
-                    url.toString(), data
-                )
+                .post(url.toString(), data)
                 .then(response => {
+                    // Update cartItems and cartTotal based on the response
                     this.cartItems = response.data.data.cart_items;
                     this.cartTotal = response.data.data.total_price;
-                    console.log(this.cartItems)
+
+                    // Update canCheckout cookie based on the presence of items in the cart
                     if (this.cartItems.length > 0) {
-                        // eslint-disable-next-line no-undef
-                        const canCheckout = useCookie("canCheckout")
+                        const canCheckout = useCookie("canCheckout");
                         canCheckout.value = "true";
                     } else {
-                        // eslint-disable-next-line no-undef
-                        const canCheckout = useCookie("canCheckout")
+                        const canCheckout = useCookie("canCheckout");
                         canCheckout.value = null;
                     }
-                    //console.log(response.data)
                 })
                 .catch(() => {
                     this.cartItems = [];
-                }).finally(() => {
+                })
+                .finally(() => {
                     this.loading = false; // Hides the loader after loading
                 });
         },
 
-        // Remove item Cart 
+        // Remove item from the cart
         async removeCartItem(stock_id, quantity, size_id, product_price) {
-            // eslint-disable-next-line no-undef
+            // Construct the URL for the API endpoint
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/cart/remove');
-            const params = {
-                //
-            };
-            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+            
+            // Prepare data for the POST request
             const data = {
-                // eslint-disable-next-line no-undef
                 "user_hash": !useUserStore().isLoggedIn ? useCookie("userHash").value : null,
                 "user_id": useUserStore().isLoggedIn ? useUserStore().authUser.id : null,
                 "stock_id": stock_id,
                 "quantity": quantity,
                 "size_id": size_id,
                 "product_price": product_price
-            }
+            };
+
+            // Make a POST request to remove an item from the cart
             return axios
-                .post(
-                    url.toString(), data
-                )
+                .post(url.toString(), data)
                 .then(() => {
+                    // Refresh cart items after removing an item
                     this.loadCartItems();
                 })
                 .catch(() => {
                     this.cartItems = [];
                 });
         },
-        
     }
 });
