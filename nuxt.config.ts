@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/proxy/**": {
-      proxy: "https://api.staging.alessandragrimoldi.com/api/v1/**"
+      proxy: "https://api.alessandragrimoldi.com/api/v1/**"
     }
   },
   postcss: {
