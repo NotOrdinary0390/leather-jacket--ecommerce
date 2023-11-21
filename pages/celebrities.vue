@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h1 class="my-4 ml-4 text-sm">
-      Celebrities
-    </h1>
-    <hr>
+    <h1 class="my-4 ml-4 text-sm">Celebrities</h1>
+    <hr />
     <div class="flex flex-wrap justify-center">
       <CardCelebrities
         v-for="(celebrity, index) in celebrities"
@@ -33,8 +31,14 @@ useHead({
   title: "Celebreties - Alessandra Grimoldi",
   meta: [
     {
-      name: "Celebreties - Alessandra Grimoldi",
-      content: "Celebreties magazine fashion Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content:
+        "Discover the celebrities wearing luxury leather jackets from Alessandra Grimoldi. Explore our celebrity fashion collection for a stylish wardrobe.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Alessandra Grimoldi, celebrities, fashion, luxury leather jackets, celebrity fashion collection",
     },
   ],
 });

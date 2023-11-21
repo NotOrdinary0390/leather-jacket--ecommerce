@@ -1,30 +1,18 @@
 <template>
   <div>
-    <h1 class="my-4 ml-4 text-sm">
-      News
-    </h1>
-    <hr class="min-[600px]:mb-16">
-    <div
-      v-if="loading"
-      class="loader-container"
-    >
+    <h1 class="my-4 ml-4 text-sm">News</h1>
+    <hr class="min-[600px]:mb-16" />
+    <div v-if="loading" class="loader-container">
       <LoaderComponent />
     </div>
-    <div
-      v-else
-      class="flex flex-wrap justify-center"
-    >
-      <div
-        v-for="post in posts"
-        :key="post.id"
-        class="card"
-      >
+    <div v-else class="flex flex-wrap justify-center">
+      <div v-for="post in posts" :key="post.id" class="card">
         <div class="div-img">
           <img
             :src="useRuntimeConfig().public.MEDIA_URL + post.image"
             :alt="post.image_meta"
             class="post-image"
-          >
+          />
         </div>
         <p class="text-sm mt-2">
           {{ post.title }}
@@ -77,17 +65,22 @@ const loadNews = () => {
     });
 };
 
-
 onMounted(() => {
   loadNews();
 });
 
 useHead({
-  title: "News - Alessandra Grimoldi",
+  title: "News - Alessandra Grimoldi: Latest Updates on Fashion Trends",
   meta: [
     {
-      name: "News - Alessandra Grimoldi",
-      content: "News fashion Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content:
+        "Stay updated with the latest news and trends in the fashion world at Alessandra Grimoldi. Explore our news section for insights into luxury leather jackets and more.",
+    },
+    {
+      name: "keywords",
+      content:
+        "News, Alessandra Grimoldi, Fashion Trends, Luxury Leather Jackets, Latest Updates, Fashion News",
     },
   ],
 });

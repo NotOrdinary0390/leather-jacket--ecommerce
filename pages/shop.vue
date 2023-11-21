@@ -89,14 +89,19 @@ onMounted(() => {
 });
 
 useHead({
-  title: "Shop - Alessandra Grimoldi",
+  title: "Shop Luxury Leather Jackets - Alessandra Grimoldi: Explore High-Quality Fashion",
   meta: [
     {
-      name: "Shop - Alessandra Grimoldi",
-      content: "Shop Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content: "Explore Alessandra Grimoldi's exquisite collection of luxury leather jackets. Discover high-quality, handcrafted fashion for a blend of timeless elegance and modern style.",
+    },
+    {
+      name: "keywords",
+      content: "Shop, Alessandra Grimoldi, Luxury Leather Jackets, High-Quality Fashion, Handcrafted Jackets, Elegant Leather Apparel, Modern Style",
     },
   ],
 });
+
 </script>
 
 <style scoped></style>

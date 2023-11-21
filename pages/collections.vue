@@ -75,11 +75,12 @@ useHead({
   title: "Collections - Alessandra Grimoldi",
   meta: [
     {
-      name: "Collections - Alessandra Grimoldi",
-      content: "Collections Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content: "Explore luxurious collections of leather jackets at Alessandra Grimoldi. Discover high-quality variations and styles to elevate your fashion.",
     },
   ],
 });
+
 </script>
 
 <style scoped>

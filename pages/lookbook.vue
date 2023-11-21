@@ -7,10 +7,7 @@
     <div v-if="collectionsStore.loading" class="loader-container">
       <LoaderComponent />
     </div>
-    <div
-      v-else
-      class="flex flex-wrap justify-center"
-    >
+    <div v-else class="flex flex-wrap justify-center">
       <div
         v-for="stock in collectionsStore.getVariations(
           collectionsStore.latestCollection
@@ -40,11 +37,17 @@ onMounted(() => {
 });
 
 useHead({
-  title: "Lookbook - Alessandra Grimoldi",
+  title: "Lookbook - Alessandra Grimoldi: Explore Our Luxury Leather Jackets",
   meta: [
     {
-      name: "Lookbook - Alessandra Grimoldi",
-      content: "Lookbook Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content:
+        "Browse through Alessandra Grimoldi's Lookbook and discover a curated collection of luxury leather jackets. Elevate your style with our handcrafted, high-quality designs that blend timeless elegance and modern fashion trends.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Lookbook, Alessandra Grimoldi, Leather Jackets, Luxury Fashion, High-Quality Leatherwear, Designer Apparel, Fashion Trends",
     },
   ],
 });

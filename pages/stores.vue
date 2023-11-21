@@ -1,9 +1,7 @@
 <template>
   <div>
-    <h1 class="my-4 ml-4 text-sm">
-      Stores
-    </h1>
-    <hr>
+    <h1 class="my-4 ml-4 text-sm">Stores</h1>
+    <hr />
     <div class="container-app">
       <div class="flex flex-wrap justify-center">
         <CardStore
@@ -14,10 +12,10 @@
       </div>
     </div>
   </div>
-</template> 
+</template>
 
 <script setup>
-// Stores 
+// Stores
 const stores = ref([
   {
     image: "/images/stores/vinicio-legnano.webp",
@@ -126,11 +124,17 @@ const stores = ref([
 ]);
 
 useHead({
-  title: "Stores - Alessandra Grimoldi",
+  title: "Discover Our Stores - Alessandra Grimoldi: Luxury Leather Jackets",
   meta: [
     {
-      name: "Stores - Alessandra Grimoldi",
-      content: "Stores shop Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content:
+        "Explore Alessandra Grimoldi's stores offering luxury leather jackets. Find our exclusive stores in Legnano, Desenzano Del Garda, Milan, Varese, Saronno, Flero, Lainate, Lonato Del Garda, Scafati, Seregno, Erba, Lecco, and Riccione.",
+    },
+    {
+      name: "keywords",
+      content:
+        "Alessandra Grimoldi Stores, Luxury Leather Jackets, Legnano, Desenzano Del Garda, Milan, Varese, Saronno, Flero, Lainate, Lonato Del Garda, Scafati, Seregno, Erba, Lecco, Riccione",
     },
   ],
 });

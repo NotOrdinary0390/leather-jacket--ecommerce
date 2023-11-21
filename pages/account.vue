@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="my-4 ml-4 text-sm">
-      Account
-    </div>
-    <hr>
+    <div class="my-4 ml-4 text-sm">Account</div>
+    <hr />
     <div class="body-account">
       <div class="container-app max-[340px]:p-0">
         <div class="w-fit my-8 p-1 mx-auto bg-white border border-gray-300">
@@ -34,10 +32,7 @@
           <div v-if="showLoginForm">
             <SignInComponent />
           </div>
-          <div
-            v-if="showRegisterForm"
-            class=""
-          >
+          <div v-if="showRegisterForm" class="">
             <RegisterComponent />
           </div>
         </div>
@@ -50,8 +45,18 @@
 import { ref } from "vue";
 
 useHead({
-  title: "Account - Alessandra Grimoldi",
-  meta: [{ name: "", content: "" }],
+  title: "Account Alessandra Grimoldi - Luxury Leather Jackets",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Manage your account with Alessandra Grimoldi. Explore our luxury leather jackets, track orders, and stay updated on the latest fashion trends.",
+    },
+    {
+      name: "keywords",
+      content: "Alessandra Grimoldi, account management, luxury fashion, leather jackets",
+    },
+  ]
 });
 
 /*------------------------
@@ -60,8 +65,8 @@ Define reactive variables
 const showLoginForm = ref(true);
 const showRegisterForm = ref(false);
 
-/* --------------- 
-  Define functions 
+/* ---------------
+  Define functions
   -----------------*/
 const showLogin = () => {
   showLoginForm.value = true;

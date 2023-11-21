@@ -63,12 +63,18 @@
 </template>
 
 <script setup>
+
 useHead({
-  title: "About - Alessandra Grimoldi",
+  title: "About Alessandra Grimoldi - Luxury Leather Jackets",
   meta: [
     {
-      name: "About - Alessandra Grimoldi",
-      content: "About Luxury Leather Jacket - Alessandra Grimoldi",
+      name: "description",
+      content:
+        "Learn more about Alessandra Grimoldi and explore the world of luxury leather jackets. Discover our commitment to quality, craftsmanship, and timeless style.",
+    },
+    {
+      name: "keywords",
+      content: "Alessandra Grimoldi, leather jackets, luxury fashion, craftsmanship",
     },
   ],
 });
