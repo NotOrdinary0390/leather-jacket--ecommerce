@@ -96,7 +96,6 @@ const loginData = reactive({
   Define functions 
   -----------------*/
 const handleLogin = () => {
-  //console.log(email.value);
   useUserStore().loginUser(loginData)
   .then(() => {
     if (useUserStore().isLoggedIn === true) {
@@ -114,7 +113,6 @@ const showRecoveryPassword = () => {
 };
 
 const handleResetPassword = () => {
-  //console.log(resetEmail);
   useUserStore().sendPasswordReset(resetEmail.value);
 };
 </script>

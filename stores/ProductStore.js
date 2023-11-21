@@ -1,9 +1,11 @@
+// Import necessary dependencies
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useCartStore } from './CartStore';
 
+// Define the 'ProductStore' store
 export const useProductStore = defineStore('ProductStore', {
-    // Define state
+    // Define the initial state of the store
     state: () => ({
         products: [],
         product: {},
@@ -18,16 +20,15 @@ export const useProductStore = defineStore('ProductStore', {
         },
     }),
 
-    // Define getters
+    // Define getters (computed properties)
     getters: {
         getVariations: (state) => [].concat(...state.products.map(product => product.stocks)),
     },
 
+    // Define actions (methods that can be called to perform asynchronous operations)
     actions: {
-
-        // Load Products from category id 
+        // Load products from a specific category id
         async loadProducts(categoryId) {
-
             axios.post('/api/products', {
                 page: this.pagination.currentPage,
                 category_id: categoryId,
@@ -37,15 +38,17 @@ export const useProductStore = defineStore('ProductStore', {
                     this.pagination.currentPage = response.data.meta.current_page;
                     this.pagination.totalProducts = response.data.meta.total;
                     this.pagination.lastPage = response.data.meta.last_page;
-                }).finally(() => {
+                })
+                .finally(() => {
                     this.loading = false;
                 });
-
         },
+
+        // Load products based on a search term
         async loadSearchProducts(searchTerm) {
             this.searchTerms = searchTerm;
-            console.log(searchTerm)
             this.loading = true;
+
             try {
                 const response = await axios.get(useRuntimeConfig().public.APP_URL + '/proxy/products', {
                     params: {
@@ -56,8 +59,6 @@ export const useProductStore = defineStore('ProductStore', {
                     }
                 });
                 this.products = response.data.data.data;
-                console.log('Prod :', this.products)
-                
             } catch (error) {
                 console.error(error);
             } finally {
@@ -65,27 +66,29 @@ export const useProductStore = defineStore('ProductStore', {
             }
         },
 
-        // Load single Product from slug
+        // Load a single product based on its slug
         async loadSingleProduct(slug) {
             this.loading = true;
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/products/' + slug);
             const params = {
                 "stocks": "",
                 "stock_images": "",
                 "stock_sizes": "",
             };
-            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
             return axios.get(url.toString())
                 .then(response => {
                     this.product = response.data.data;
                     this.currentVariation = this.product.stocks[0];
-                }).finally(() => {
+                })
+                .finally(() => {
                     this.loading = false;
                 });
         },
 
-        // Change product variant 
+        // Change the product variant color
         async setColorVariant(variation) {
             this.currentVariation = variation;
             useCartStore().cartItem.color = variation.color_name;
@@ -93,12 +96,12 @@ export const useProductStore = defineStore('ProductStore', {
             useCartStore().cartItem.product_price = variation.price;
         },
 
-        // Select size variant
+        // Select the size variant
         async selectSizeVariant(id) {
             useCartStore().cartItem.size_id = id;
         },
 
-        // Select quantity item
+        // Select the quantity of the item
         async selectQuantity(quantity) {
             useCartStore().cartItem.quantity = quantity;
         },

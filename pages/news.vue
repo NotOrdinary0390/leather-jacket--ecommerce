@@ -55,7 +55,7 @@ const loadNews = () => {
         // Sort by created_at in descending order
         return new Date(b.created_at) - new Date(a.created_at);
       });
-      console.log(response.data.data);
+      
     })
     .catch((error) => {
       console.error("Error loading news:", error);

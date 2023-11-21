@@ -55,7 +55,6 @@ export const useCartStore = defineStore('CartStore', {
                     // Handle errors and set sizeError if there is an issue with size_id
                     if (error.response.data.errors.size_id) {
                         this.sizeError = true;
-                        console.log(this.sizeError);
                     }
                 })
                 .finally(() => {

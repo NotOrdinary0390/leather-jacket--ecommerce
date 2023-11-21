@@ -69,16 +69,15 @@ function selectSize(id, size) {
   productStore.selectSizeVariant(id);
   selectedSize.value = size;
   isOpen.value = false;
-  //console.log(size)
 }
 
 onClickOutside(selectSizes, () => {
   isOpen.value = false;
 });
 
- watch( sizeError, (l) => {
-  console.log(l)
- })
+//  watch( sizeError, (l) => {
+  
+//  })
 </script>
 
 <style scoped>

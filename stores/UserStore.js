@@ -1,10 +1,11 @@
+// Import necessary dependencies
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useCartStore } from './CartStore';
 
-// Define the store named 'useUserStore'
+// Define the 'UserStore' store
 export const useUserStore = defineStore('UserStore', {
-    // Define the state of the store
+    // Define the initial state of the store
     state: () => {
         return {
             authUser: [],
@@ -24,64 +25,65 @@ export const useUserStore = defineStore('UserStore', {
         }
     },
 
-    // Define getters 
+    // Define getters
     getters: {
         login: (state) => state.isLoggedIn,
         user: (state) => state.authUser,
     },
 
-    // Define actions
+    // Define actions (methods that can be called to perform asynchronous operations)
     actions: {
-        //Register new user
+        // Register new user
         async registerUser(registrationData) {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/register');
-            await axios.post(url.toString(), registrationData)
-                .then(response => {
-                        this.registerMessage = response.data.message
-                })
-                .catch(error => {
-                    if (error.response.data.errors) {
-                        this.registerMessage = error.response.data.message
-                        if (error.response.data.errors.email) {
-                            this.emailError = error.response.data.errors.email[0];
-                            setTimeout(() => {
-                                this.emailError = '';
-                            }, 10000);
-                        }
-                        if (error.response.data.errors.password) {
-                            this.passwordError = error.response.data.errors.password[0];
-                            setTimeout(() => {
-                                this.passwordError = '';
-                            }, 10000);
-                        }
-                        if (error.response.data.errors.password_confirmation) {
-                            this.confirmPasswordError = error.response.data.errors.password_confirmation[0];
-                            setTimeout(() => {
-                                this.confirmPasswordError = ''; // 
-                            }, 10000);
-                        }
+
+            try {
+                const response = await axios.post(url.toString(), registrationData);
+                this.registerMessage = response.data.message;
+            } catch (error) {
+                if (error.response.data.errors) {
+                    this.registerMessage = error.response.data.message;
+
+                    // Handle specific errors and update state variables accordingly
+                    if (error.response.data.errors.email) {
+                        this.emailError = error.response.data.errors.email[0];
+                        setTimeout(() => {
+                            this.emailError = '';
+                        }, 10000);
                     }
-                });
+                    if (error.response.data.errors.password) {
+                        this.passwordError = error.response.data.errors.password[0];
+                        setTimeout(() => {
+                            this.passwordError = '';
+                        }, 10000);
+                    }
+                    if (error.response.data.errors.password_confirmation) {
+                        this.confirmPasswordError = error.response.data.errors.password_confirmation[0];
+                        setTimeout(() => {
+                            this.confirmPasswordError = '';
+                        }, 10000);
+                    }
+                }
+            }
         },
-        //Login user
+
+        // Login user
         async loginUser(loginData) {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/login');
+
             try {
                 const response = await axios.post(url.toString(), loginData);
                 const userData = response.data;
 
                 if (userData && userData.data && userData.data.token) {
-                    // eslint-disable-next-line no-undef
                     const accessToken = useCookie("accessToken", { maxAge: 172800 });
                     accessToken.value = userData.data.token;
                     this.isLoggedIn = true;
                     await this.getUser();
                 }
-
             } catch (error) {
                 if (error.response && error.response.data.errors) {
+                    // Handle specific errors and update state variables accordingly
                     if (error.response.data.errors.email) {
                         this.emailLoginError = error.response.data.errors.email[0];
                         setTimeout(() => {
@@ -97,14 +99,13 @@ export const useUserStore = defineStore('UserStore', {
                 }
             }
         },
+
         // Get the logged-in user
         async getUser() {
-            // eslint-disable-next-line no-undef
             if (useCookie("accessToken").value) {
                 try {
                     const userResponse = await axios.get('/proxy/users/auth', {
                         headers: {
-                            // eslint-disable-next-line no-undef
                             Authorization: `Bearer ${useCookie("accessToken").value}`
                         }
                     });
@@ -112,76 +113,67 @@ export const useUserStore = defineStore('UserStore', {
                         this.authUser = userResponse.data.data;
                         this.isLoggedIn = true;
                     }
-
                 } catch (error) {
-                    //
+                    // Handle errors if necessary
                 }
             }
         },
+
         // Send email for password reset
         async sendPasswordReset(resetEmail) {
-            console.log(resetEmail)
-            axios
-                // eslint-disable-next-line no-undef
-                .post(useRuntimeConfig().public.APP_URL + "/proxy/users/forgot-password", {
-                    email: resetEmail,
-                })
+            axios.post(useRuntimeConfig().public.APP_URL + "/proxy/users/forgot-password", {
+                email: resetEmail,
+            })
                 .then(() => {
-                    this.resetMessage = "Reset Password sent successfull"
+                    this.resetMessage = "Reset Password sent successfully";
                 })
                 .catch(() => {
-                    this.resetMessage = "Reset Password error"
+                    this.resetMessage = "Reset Password error";
                 });
         },
-        // Change or create default shipping data.
+
+        // Change or create default shipping data
         async changeShippingData(addressData) {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/change-shipping-data');
 
             try {
                 const response = await axios.put(url.toString(), addressData, {
                     headers: {
-                        // eslint-disable-next-line no-undef
                         Authorization: `Bearer ${useCookie("accessToken").value}`
                     }
                 });
                 this.changeDataMsg = response.data.message;
             } catch (error) {
                 this.changeDataMsg = error.response.data.message;
-                console.log(error.response.data.message);
             }
         },
-        // Load user default shipping data.
+
+        // Load user default shipping data
         async loadDefaultShippingData() {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/get-shipping-data');
 
-            // eslint-disable-next-line no-undef
             if (useCookie("accessToken").value) {
                 try {
                     const response = await axios.get(url.toString(), {
                         headers: {
-                            // eslint-disable-next-line no-undef
                             Authorization: `Bearer ${useCookie("accessToken").value}`
                         }
                     });
-                    console.log(response.data);
-                    this.defaultUserShippingData = response.data.data
+                    this.defaultUserShippingData = response.data.data;
                 } catch (error) {
-                    console.log(error.response.data.message);
+                    // Handle errors if necessary
                 }
             }
         },
-        // load order's user from id
+
+        // Load user orders
         async loadOrderUser() {
             this.loading = true; // Shows the loader while loading
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/orders`);
 
             try {
                 const response = await axios.get(url.toString(), {
                     headers: {
-                        // eslint-disable-next-line no-undef
                         Authorization: `Bearer ${useCookie("accessToken").value}`
                     }
                 });
@@ -194,28 +186,24 @@ export const useUserStore = defineStore('UserStore', {
                 this.loading = false; // Hides the loader after loading
             }
         },
+
         // Logout user
         logoutUser() {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/logout');
             const userId = this.authUser.id;
+
             axios.post(url.toString(), userId, {
                 headers: {
-                    // eslint-disable-next-line no-undef
                     Authorization: `Bearer ${useCookie("accessToken").value}`
                 }
             })
                 .then(() => {
-                    // eslint-disable-next-line no-undef
                     useCookie("accessToken").value = null;
                     this.isLoggedIn = false;
                     this.authUser = [];
-                    // eslint-disable-next-line no-undef
                     useCartStore().cartItem.user_hash = useCookie("userHash").value;
-                    this.$router.push("/shop")
+                    this.$router.push("/shop");
                 });
         },
-
-
     }
 });

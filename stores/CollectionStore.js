@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
+// Define the 'CollectionStore' store
 export const useCollectionStore = defineStore('CollectionStore', {
     // Define state
     state: () => ({
@@ -16,15 +17,15 @@ export const useCollectionStore = defineStore('CollectionStore', {
         },
     }),
 
-    // Define getters
+    // Define getters (computed properties)
     getters: {
 
     },
 
+    // Define actions (methods that can be called to perform asynchronous operations)
     actions: {
-        // Load all Collections 
+        // Load all collections
         async loadCollections() {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections');
             const params = {
                 "year": "",
@@ -32,7 +33,9 @@ export const useCollectionStore = defineStore('CollectionStore', {
                 "images": "",
                 "page": this.pagination.currentPage,
             };
-            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+            Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
             return axios
                 .get(
                     url.toString(),
@@ -41,17 +44,18 @@ export const useCollectionStore = defineStore('CollectionStore', {
                     this.collections = response.data.data.data;
                     this.pagination.currentPage = response.data.data.meta.current_page;
                     this.pagination.totalProducts = response.data.data.meta.total;
-                    this.pagination.lastPage = response.data.data.meta.last_page;                
+                    this.pagination.lastPage = response.data.data.meta.last_page;
                 })
                 .catch(() => {
                     this.collections = [];
-                }).finally(() => {
+                })
+                .finally(() => {
                     this.loading = false; // Hides the loader after loading
                 });
         },
-        // Load latest Collection 
+
+        // Load the latest collection
         async loadLatestCollection() {
-            // eslint-disable-next-line no-undef
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/collections/look-book');
 
             return axios
@@ -60,18 +64,17 @@ export const useCollectionStore = defineStore('CollectionStore', {
                 )
                 .then(response => {
                     this.latestCollection = response.data.data;
-                    console.log(this.latestCollection)
                 })
                 .catch(error => {
-                    console.log(error);
-                }).finally(() => {
+                    //
+                })
+                .finally(() => {
                     this.loading = false; // Hides the loader after loading
                 });
         },
-        // load collection by slug
-        async getCollectionBySlug(collectionSlug) {
 
-            // eslint-disable-next-line no-undef
+        // Load a collection by its slug
+        async getCollectionBySlug(collectionSlug) {
             const url = new URL(useRuntimeConfig().public.APP_URL + `/proxy/collections/${collectionSlug}`);
 
             return axios
@@ -81,14 +84,14 @@ export const useCollectionStore = defineStore('CollectionStore', {
                 .then(response => {
                     this.collection = response.data.data;
                     this.currentCollectionStocks = this.collection.products.map(product => product.stocks).flat();
-                    console.log(this.collection)
                 })
                 .catch(error => {
                     console.error('Error loading collection by slug:', error);
                     throw error;
                 });
         },
-        // Load product variations for collection
+
+        // Get product variations for a collection
         getVariations(collection) {
             return collection.products.map(product => product.stocks).flat();
         }

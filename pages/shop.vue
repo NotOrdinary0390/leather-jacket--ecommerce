@@ -5,6 +5,7 @@
     </h1>
     <hr>
     <div class="container-app">
+      <!-- div name categories -->
       <div class="w-fit mx-auto p-1">
         <div class="my-8 flex justify-center items-center w-[230px]">
           {{ useCategoryStore.categories }}
@@ -23,6 +24,7 @@
           </p>
         </div>
       </div>
+      <!-- End div name categories -->
       <div
         v-if="useProductStore().loading"
         class="loader-container"

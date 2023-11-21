@@ -89,7 +89,7 @@ useHead({
   font-size: 8pt;
   width: 350px;
   background-image: linear-gradient(to right, #000, #333);
-  background-size: 200% 100%; /* Doppia larghezza per coprire tutto lo spazio */
+  background-size: 200% 100%; 
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -97,7 +97,7 @@ useHead({
 }
 
 .collection-link:hover {
-  background-position: -100% 0; /* Sposta il gradiente a destra */
+  background-position: -100% 0; 
 }
 
 @media screen and (max-width: 450px) {
