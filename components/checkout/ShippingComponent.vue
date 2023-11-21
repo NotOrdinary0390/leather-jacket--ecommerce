@@ -368,7 +368,14 @@ onMounted(() => {
     .loadDefaultShippingData()
     .then(() => {
       shippingData.legal_first_name = useUserStore().defaultUserShippingData.shipping_first_name;
-
+      shippingData.legal_last_name = useUserStore().defaultUserShippingData.shipping_last_name;
+      shippingData.contact_email = useUserStore().defaultUserShippingData.contact_email;
+      shippingData.legal_country_code = useUserStore().defaultUserShippingData.shipping_country_code;
+      shippingData.legal_address = useUserStore().defaultUserShippingData.shipping_address;
+      shippingData.legal_street_number = useUserStore().defaultUserShippingData.shipping_street_number;
+      shippingData.legal_city = useUserStore().defaultUserShippingData.shipping_city;
+      shippingData.legal_zip_code = useUserStore().defaultUserShippingData.shipping_zip_code;
+      shippingData.legal_contact_phone = useUserStore().defaultUserShippingData.contact_phone;
     });
 });
 </script>
