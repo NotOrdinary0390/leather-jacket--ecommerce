@@ -48,14 +48,21 @@ const formatNewsDateCustom = (dateString) => {
 
 const loadNews = () => {
   loading.value = true; //  Set the loader during loading.
+  const url = new URL(useRuntimeConfig().public.APP_URL + "/proxy/posts");
+  const params = {
+    "no-paginate": "",
+  };
+
+  Object.keys(params).forEach((key) =>
+    url.searchParams.append(key, params[key])
+  );
   axios
-    .get(useRuntimeConfig().public.APP_URL + "/proxy/posts")
+    .get(url.toString())
     .then((response) => {
       posts.value = response.data.data.data.sort((a, b) => {
         // Sort by created_at in descending order
         return new Date(b.created_at) - new Date(a.created_at);
       });
-      
     })
     .catch((error) => {
       console.error("Error loading news:", error);

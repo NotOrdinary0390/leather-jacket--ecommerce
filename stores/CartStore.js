@@ -27,7 +27,7 @@ export const useCartStore = defineStore('CartStore', {
         // Getter methods can be added here
     },
 
-    // Define actions (methods that can be called to perform asynchronous operations)
+    // Define actions 
     actions: {
         // Add To Cart
         async AddToCart() {

@@ -8,7 +8,6 @@ export default defineEventHandler(async () => {
 
     let categories = [];
 
-    // eslint-disable-next-line no-undef
     const url = new URL(useRuntimeConfig().public.API_URL + '/categories');
 
     const params = {
