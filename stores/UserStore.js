@@ -69,6 +69,15 @@ export const useUserStore = defineStore('UserStore', {
 
         // Login user
         async loginUser(loginData) {
+
+            // Add days to date
+            Date.prototype.addDays = function (days) {
+                const date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            };
+            const date = new Date();
+
             const url = new URL(useRuntimeConfig().public.APP_URL + '/proxy/users/login');
 
             try {
@@ -76,7 +85,7 @@ export const useUserStore = defineStore('UserStore', {
                 const userData = response.data;
 
                 if (userData && userData.data && userData.data.token) {
-                    const accessToken = useCookie("accessToken", { maxAge: 172800 });
+                    const accessToken = useCookie("accessToken", { expires: date.addDays(5) });
                     accessToken.value = userData.data.token;
                     this.isLoggedIn = true;
                     await this.getUser();
