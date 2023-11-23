@@ -39,7 +39,7 @@ const handleUserHash = () => {
           },
         })
         .then(() => {
-          const userHash = useCookie("userHash", { maxAge: 518400 });
+          const userHash = useCookie("userHash", { expires: date.addDays(5) });
           userHash.value = hash;
         });
   }
