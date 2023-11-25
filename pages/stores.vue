@@ -121,6 +121,22 @@ const stores = ref([
     city: "Riccione, RN",
     cap: "47838",
   },
+  {
+    image: "/images/stores/le-follie.png",
+    alt: "abbigliamento grimoldi le follie shop",
+    name: "LE FOLLIE",
+    address: "C. Battisti, 29",
+    city: "Chiudono, BG",
+    cap: "24060",
+  },
+  {
+    image: "/images/stores/sorey-p.png",
+    alt: "abbigliamento grimoldi sorey-p shop",
+    name: "LE FOLLIE",
+    address: "Corso XV Aprile, 2",
+    city: "Gallarate, VA",
+    cap: "21013",
+  },
 ]);
 
 useHead({
