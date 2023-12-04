@@ -50,7 +50,7 @@ const props = defineProps({
     height: fit-content;
   }
   .img {
-    height: max-content;
+    height: auto;
   }
 }
 </style>

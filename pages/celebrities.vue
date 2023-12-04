@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-20">
     <h1 class="my-4 ml-4 text-sm">Celebrities</h1>
     <hr />
     <div class="flex flex-wrap justify-center">
